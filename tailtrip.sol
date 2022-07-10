@@ -1,13 +1,13 @@
 pragma solidity ^0.4.17;
- 
+
 // Factory in order to create mulitple instances of Trip contract without
 // manully constructing a template every time for the captain
 
 contract TripFactory {
     address[] public deployedTrips;
 
-    function createTrip(uint minimumPrice, uint seats) public {
-        address newTrip = new Trip(minimumPrice, seats, msg.sender);
+    function createTrip(uint256 price, string description) public {
+        address newTrip = new Trip(price, msg.sender, description);
         deployedTrips.push(newTrip);
     }
 
@@ -16,127 +16,100 @@ contract TripFactory {
     }
 }
 
-
 contract Trip {
- 
     address public captain;
-    uint public minimumPrice;
-    uint public seats;
-    address[] public clientAddresses;
-    uint public numberOfClients = 0;
-    uint public seatCounter = 0;
- 
-//client information
+    address public client;
+    uint256 public boatPrice;
+    string public description;
+    Client public info;
+
+    //client information
     struct Client {
         string name;
-        uint number;
-        uint seatsBooked;
+        uint256 number;
     }
 
-    mapping (address => Client) clientStruct;
-    mapping (address => bool) isClient;
- 
     modifier restricted() {
         require(msg.sender == captain);
         _;
     }
 
     modifier onlyClient() {
-        require(isClient[msg.sender] == true);
+        require(msg.sender == client);
         _;
     }
- 
-    function Trip(uint price, uint noOfSeats, address creator) public {
-        captain = creator;
-        seats = noOfSeats; 
-        minimumPrice = price/seats;      
-    }
- 
-    function reserve(string name, uint number, uint reserveSeats) public payable {
-        require(msg.value >= minimumPrice * reserveSeats);
-        require(numberOfClients + reserveSeats <= seats);
-        assignSeats(reserveSeats);
 
-        Client memory newClient = Client({
-            name: name,
-            number: number,
-            seatsBooked: reserveSeats
-        });
-        
-        clientStruct[msg.sender] = newClient;
-        isClient[msg.sender] = true;
-        numberOfClients++;
+    function Trip(
+        uint256 _price,
+        address _captain,
+        string _description
+    ) public payable {
+        require(msg.value >= _price * 2);
+        captain = _captain;
+        boatPrice = _price;
+        description = _description;
     }
 
-    function assignSeats(uint _reserveSeats) private {
-        for(uint i = 0; i < _reserveSeats; i ++){
-            clientAddresses.push(msg.sender);
-            seatCounter++;
-        }
- 
+    function reserve(string name, uint256 number) public payable {
+        require(msg.sender != captain);
+        require(msg.value >= boatPrice * 2);
+        require(cancelled == false);
+
+        client = msg.sender;
+
+        Client memory newClient = Client({name: name, number: number});
+
+        info = newClient;
     }
 
-    uint public typeVote;
-    bool public readyToVote = false;
-    uint public yesCount = 0;
-    uint public noCount = 0;
-    bool public refundStatus = false;
-    uint public funds;
+    bool public readyToVote;
+    uint256 public yesCount = 0;
+    bool public cancelled;
+    string public typeOfVote;
 
-    mapping(address => bool) clientVoted;
+    mapping(address => bool) voted;
 
-    function startVote() public {
+    function startVote(string _typeOfVote) public restricted {
+        typeOfVote = _typeOfVote;
         readyToVote = true;
-        //captain use to confirm client - "Does the client approve this payment"
-        if(msg.sender == captain){
-            typeVote = 0;  
-        //client use to confirm captain - "Is captain here?"
-        } else {
-            typeVote = 1;
-        }
-        
     }
 
     function approve() public onlyClient {
-        require(readyToVote == true && clientVoted[msg.sender] == false);
+        require(readyToVote == true);
+        require(voted[msg.sender] == false);
         yesCount++;
-        clientVoted[msg.sender] = true;
-    }
-
-    function deny() public onlyClient {
-        require(readyToVote == true && clientVoted[msg.sender] == false);
-        noCount++;
-        clientVoted[msg.sender] = true;
+        voted[msg.sender] = true;
     }
 
     function closeVote() public {
-        require(readyToVote == true);
-        require(yesCount + noCount > clientAddresses.length/2);
-        if(typeVote == 0) {    
-            if(yesCount > clientAddresses.length/2){
-                recievePayment();
-            } else {
-                funds = this.balance/clientAddresses.length;
-                refundStatus = true;   
-            }
-        } else if(typeVote == 1) {
-            if(noCount > clientAddresses.length/2){
-                funds = this.balance/clientAddresses.length;
-                refundStatus = true; 
-            } else {
-                recievePayment();
-            }   
+        require(readyToVote == true && yesCount == 1);
+
+        if (keccak256(typeOfVote) == keccak256("confirm")) {
+            confirmation();
+        } else if (keccak256(typeOfVote) == keccak256("refund")) {
+            refund();
         }
+
         readyToVote = false;
     }
 
-    function recievePayment() private {
-        captain.transfer(this.balance);
+    function confirmation() private {
+        captain.transfer(boatPrice * 3);
+        client.transfer(boatPrice);
     }
 
-    function refund() public onlyClient{
-        require(refundStatus == true);
-        msg.sender.transfer(funds * clientStruct[msg.sender].seatsBooked);
-        
+    function refund() private {
+        captain.transfer(boatPrice * 2);
+        client.transfer(boatPrice * 2);
+    }
+
+    function cancellation() public restricted {
+        require(client == 0x0000000000000000000000000000000000000000);
+        cancelled = true;
+        captain.transfer(boatPrice * 2);
+    }
+
+    function transferRestFunds() public {
+        msg.sender.transfer(this.balance);
     }
 }
