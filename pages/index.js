@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, Card } from "semantic-ui-react";
 import factory from "../ethereum/factory";
+import Layout from "../components/Layout";
 
 class TripIndex extends Component {
   static async getInitialProps() {
@@ -23,17 +24,19 @@ class TripIndex extends Component {
 
   render() {
     return (
-      <div>
-        <link
-          async
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css"
-        />
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui-react/dist/umd/semantic-ui-react.min.js"></script>
-        <h3>Opened Trips</h3>
-        {this.renderTrips()}
-        <Button content="Create Trip" icon="add" primary />
-      </div>
+      <Layout>
+        <div>
+          <link
+            async
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css"
+          />
+          <script src="https://cdn.jsdelivr.net/npm/semantic-ui-react/dist/umd/semantic-ui-react.min.js"></script>
+          <h3>Open Trips</h3>
+          {this.renderTrips()}
+          <Button content="Create Trip" icon="add" primary />
+        </div>
+      </Layout>
     );
   }
 }
