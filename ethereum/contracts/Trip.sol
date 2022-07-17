@@ -125,4 +125,19 @@ contract Trip {
             client.transfer(deposit);
         }
     }
+
+    function getSummary() public view returns (
+      uint, uint, address, uint
+      ) {
+        return (
+          boatPrice,
+          deposit,
+          captain,
+          totalBalance
+        );
+    }
+    
+    function getTripStatus() public view returns (bool) {
+        return cancelled;
+    }
 }
