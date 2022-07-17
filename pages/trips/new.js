@@ -1,32 +1,35 @@
-import React, { Component } from "react";
-import { Form, Button, Input, Message } from "semantic-ui-react";
-import Layout from "../../components/Layout";
-import factory from "../../ethereum/factory";
-import web3 from "../../ethereum/web3";
+import React, { Component } from 'react'
+import { Form, Button, Input, Message } from 'semantic-ui-react'
+import Layout from '../../components/Layout'
+import factory from '../../ethereum/factory'
+import web3 from '../../ethereum/web3'
+import { Router } from '../../routes'
 
 class TripNew extends Component {
   state = {
-    boatPrice: "",
-    errorMessage: "",
+    boatPrice: '',
+    errorMessage: '',
     loading: false,
-  };
+  }
 
   onSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    this.setState({ loading: true, errorMessage: "" });
+    this.setState({ loading: true, errorMessage: '' })
 
     try {
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await web3.eth.getAccounts()
       await factory.methods.createTrip(this.state.boatPrice).send({
         from: accounts[0],
-      });
+      })
+
+      Router.pushRoute('/')
     } catch (err) {
-      this.setState({ errorMessage: err.message });
+      this.setState({ errorMessage: err.message })
     }
 
-    this.setState({ loading: false });
-  };
+    this.setState({ loading: false })
+  }
 
   render() {
     return (
@@ -50,8 +53,8 @@ class TripNew extends Component {
           </Button>
         </Form>
       </Layout>
-    );
+    )
   }
 }
 
-export default TripNew;
+export default TripNew
