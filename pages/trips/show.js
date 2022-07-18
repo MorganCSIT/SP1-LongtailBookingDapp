@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, Grid } from 'semantic-ui-react'
 import Layout from '../../components/Layout'
 import Trip from '../../ethereum/trip'
+import web3 from '../../ethereum/web3'
+import BookForm from '../../components/BookForm'
 
 class TripShow extends Component {
   static async getInitialProps(props) {
@@ -27,6 +29,28 @@ class TripShow extends Component {
         description: 'The Captain created this trip',
         style: { overflowWrap: 'break-word' },
       },
+
+      {
+        // convert to ether using web3.utils.fromWei(, 'ether')
+        header: boatPrice,
+        meta: 'Trip price',
+        description: 'Price of the trip',
+        style: { overflowWrap: 'break-word' },
+      },
+
+      {
+        header: deposit,
+        meta: 'Deposit amount',
+        description: 'Deposit needed to book this trip',
+        style: { overflowWrap: 'break-word' },
+      },
+
+      {
+        header: totalBalance,
+        meta: 'Trip balance',
+        description: 'The amount deposited in this trip',
+        style: { overflowWrap: 'break-word' },
+      },
     ]
 
     return <Card.Group items={items} />
@@ -35,8 +59,15 @@ class TripShow extends Component {
   render() {
     return (
       <Layout>
-        <h3>Trip Show</h3>
-        {this.renderCards()}
+        <Grid>
+          <Grid.Column width={10}>
+            <h3>Trip Show</h3>
+            {this.renderCards()}
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <BookForm />
+          </Grid.Column>
+        </Grid>
       </Layout>
     )
   }
