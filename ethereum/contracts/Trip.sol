@@ -33,8 +33,6 @@ contract Trip {
 
     //client information
     struct Client {
-        string name;
-        uint256 number;
         bool captainConfirmed;
     }
 
@@ -54,7 +52,7 @@ contract Trip {
         deposit = boatPrice * 2;
     }
 
-    function reserve(string name, uint256 number) public payable {
+    function reserve() public payable {
         require(msg.sender != captain);
         require(msg.value >= boatPrice * 2);
         require(cancelled == false);
@@ -62,8 +60,6 @@ contract Trip {
         totalBalance += msg.value;
         client = msg.sender;
         Client memory newClient = Client({
-            name: name,
-            number: number,
             captainConfirmed: false
         });
         info = newClient;

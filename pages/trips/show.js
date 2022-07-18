@@ -12,6 +12,7 @@ class TripShow extends Component {
     const summary = await trip.methods.getSummary().call()
 
     return {
+      address: props.query.address,
       boatPrice: summary[0],
       deposit: summary[1],
       captain: summary[2],
@@ -65,7 +66,7 @@ class TripShow extends Component {
             {this.renderCards()}
           </Grid.Column>
           <Grid.Column width={6}>
-            <BookForm />
+            <BookForm address={this.props.address} />
           </Grid.Column>
         </Grid>
       </Layout>
