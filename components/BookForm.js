@@ -6,11 +6,15 @@ import { Router } from '../routes'
 class BookForm extends Component {
   state = {
     value: '',
+    errorMessage: '',
+    loading: false,
   }
 
   onSubmit = async (event) => {
     event.preventDefault()
     const trip = Trip(this.props.address)
+
+    this.setState({ loading: true, errorMessage: '' })
 
     try {
       const accounts = await web3.eth.getAccounts()
@@ -20,11 +24,14 @@ class BookForm extends Component {
       })
 
       Router.replaceRoute(`/trips/${this.props.address}`)
-    } catch (err) {}
+    } catch (err) {
+      this.setState({ errorMessage: err.messaage })
+    }
+    this.setState({ loading: false, message: '' })
   }
   render() {
     return (
-      <Form onSubmit={this.onSubmit}>
+      <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
         <Form.Field>
           <label>Amount to Book</label>
           <Input
@@ -34,7 +41,10 @@ class BookForm extends Component {
             labelPosition="right"
           />
         </Form.Field>
-        <Button primary>Book!</Button>
+        <Message error header="Oops!" content={this.state.errorMessage} />
+        <Button loading={this.state.loading} primary>
+          Book!
+        </Button>
       </Form>
     )
   }
