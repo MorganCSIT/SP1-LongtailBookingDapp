@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Form, Input, Message, Button } from 'semantic-ui-react'
 import Trip from '../ethereum/trip'
 import web3 from '../ethereum/web3'
-
+import { Router } from '../routes'
 class BookForm extends Component {
   state = {
     value: '',
@@ -18,6 +18,8 @@ class BookForm extends Component {
         from: accounts[0],
         value: this.state.value,
       })
+
+      Router.replaceRoute(`/trips/${this.props.address}`)
     } catch (err) {}
   }
   render() {
