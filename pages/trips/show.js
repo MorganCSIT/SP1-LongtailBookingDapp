@@ -4,6 +4,7 @@ import Layout from '../../components/Layout'
 import Trip from '../../ethereum/trip'
 import web3 from '../../ethereum/web3'
 import BookForm from '../../components/BookForm'
+import { Link } from '../../routes'
 
 class TripShow extends Component {
   static async getInitialProps(props) {

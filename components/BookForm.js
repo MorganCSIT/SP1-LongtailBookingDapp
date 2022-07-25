@@ -3,6 +3,7 @@ import { Form, Input, Message, Button } from 'semantic-ui-react'
 import Trip from '../ethereum/trip'
 import web3 from '../ethereum/web3'
 import { Router } from '../routes'
+import { link } from '../routes'
 class BookForm extends Component {
   state = {
     value: '',
