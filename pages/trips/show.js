@@ -4,6 +4,7 @@ import Layout from '../../components/Layout'
 import Trip from '../../ethereum/trip'
 import web3 from '../../ethereum/web3'
 import BookForm from '../../components/BookForm'
+import VoteForm from '../../components/VoteForm'
 import { Link } from '../../routes'
 import { type } from 'mocha/lib/utils'
 
@@ -100,6 +101,9 @@ class TripShow extends Component {
           </Grid.Column>
           <Grid.Column width={6}>
             <BookForm address={this.props.address} />
+          </Grid.Column>
+          <Grid.Column width={6}>
+            <VoteForm address={this.props.address} />
           </Grid.Column>
         </Grid>
       </Layout>
