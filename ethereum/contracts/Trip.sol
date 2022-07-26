@@ -123,13 +123,16 @@ contract Trip {
     }
 
     function getSummary() public view returns (
-      uint, uint, address, uint
+      uint, uint, address, uint, bool, bool, string
       ) {
         return (
           boatPrice,
           deposit,
           captain,
-          totalBalance
+          totalBalance,
+          cancelled,
+          readyToVote,
+          typeOfVote
         );
     }
     
