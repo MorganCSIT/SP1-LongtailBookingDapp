@@ -3,8 +3,6 @@ pragma solidity ^0.4.17;
 // Factory in order to create mulitple instances of Trip contract without
 // manully constructing a template every time for the captain
 
-// remove description
-
 contract TripFactory {
     address[] public deployedTrips;
 
@@ -21,20 +19,24 @@ contract TripFactory {
 contract Trip {
     address public captain;
     address public client;
+    string public description;
     uint256 public boatPrice;
-    Client public info;
     uint256 public totalBalance;
     bool public readyToVote;
+
     bool public cancelled;
-    string public typeOfVote;
+    bool public reserved;
+    bool public refunded;
+    bool public clientConfirmed;
+    bool public captainConfirmed;
+
+    uint8 public typeOfVote;
     uint256 public deposit;
 
     mapping(address => bool) addressStatus;
 
-    //client information
-    struct Client {
-        bool captainConfirmed;
-    }
+    
+    
 
     modifier restricted() {
         require(msg.sender == captain);
@@ -55,31 +57,35 @@ contract Trip {
     function reserve() public payable {
         require(msg.sender != captain);
         require(msg.value >= boatPrice * 2);
-        require(cancelled == false);
+        require(reserved == false);
 
+        reserved = true;
         totalBalance += msg.value;
         client = msg.sender;
-        Client memory newClient = Client({
-            captainConfirmed: false
-        });
-        info = newClient;
+
     }
 
-    function captainConfirmation() public payable restricted {
+    function setDescription(string _description) public restricted {
+        description = _description;
+    }
+
+    function captainConfirmation() public restricted payable {
         require(msg.value >= boatPrice * 2);
         require(client != 0x0000000000000000000000000000000000000000);
-        info.captainConfirmed = true;
+        captainConfirmed = true;
         totalBalance += msg.value;
+
     }
 
+
     function startVote() public {
-        require(info.captainConfirmed == true);
+        require(captainConfirmed == true);
         require(addressStatus[msg.sender] == false);
         readyToVote = true;
-        if (msg.sender == captain) {
-            typeOfVote = "confirm";
-        } else if (msg.sender == client) {
-            typeOfVote = "refund";
+        if(msg.sender == captain){
+            typeOfVote = 0;
+        } else if(msg.sender == client){
+            typeOfVote = 1;
         }
     }
 
@@ -87,14 +93,15 @@ contract Trip {
         require(readyToVote == true);
         require(addressStatus[msg.sender] == false);
 
-        if (keccak256(typeOfVote) == keccak256("confirm")) {
+        if (typeOfVote == 0) {
             require(msg.sender == client);
             confirmation();
             addressStatus[client] = true;
-        } else if (keccak256(typeOfVote) == keccak256("refund")) {
+        } else if (typeOfVote == 1) {
             require(msg.sender == captain);
             refund();
             addressStatus[captain] = true;
+            refunded = true;
         }
 
         readyToVote = false;
@@ -103,28 +110,28 @@ contract Trip {
     function confirmation() private {
         captain.transfer(boatPrice * 3);
         client.transfer(boatPrice);
+        clientConfirmed = true;
     }
 
     function refund() private {
         captain.transfer(deposit);
         client.transfer(deposit);
+        refunded = true;
     }
 
     function cancellation() public {
         require(cancelled == false);
-        if (msg.sender == captain) {
+        if(msg.sender == captain){
             require(client == 0x0000000000000000000000000000000000000000);
-            cancelled = true;
-        } else if (msg.sender == client) {
-            require(info.captainConfirmed == false);
-            cancelled = true;
+            cancelled = true;  
+        } else if(msg.sender == client){
+            require(captainConfirmed == false);
             client.transfer(deposit);
+            reserved = false;
         }
     }
 
-    function getSummary() public view returns (
-      uint, uint, address, uint, bool, bool, string
-      ) {
+    function getSummary() public view returns (uint, uint, address, uint, bool, bool, uint8) {
         return (
           boatPrice,
           deposit,
@@ -134,9 +141,5 @@ contract Trip {
           readyToVote,
           typeOfVote
         );
-    }
-    
-    function getTripStatus() public view returns (bool) {
-        return cancelled;
     }
 }
