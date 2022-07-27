@@ -131,7 +131,7 @@ contract Trip {
         }
     }
 
-    function getSummary() public view returns (uint, uint, address, uint, bool, bool, uint8) {
+    function getSummary() public view returns (uint, uint, address, uint, bool, bool, uint8, bool, bool, bool, bool) {
         return (
           boatPrice,
           deposit,
@@ -139,7 +139,11 @@ contract Trip {
           totalBalance,
           cancelled,
           readyToVote,
-          typeOfVote
+          typeOfVote,
+          reserved,
+          refunded,
+          clientConfirmed,
+          captainConfirmed
         );
     }
 }

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Card, Grid, Button } from 'semantic-ui-react'
+import { Card, Grid, Button, Divider } from 'semantic-ui-react'
 import Layout from '../../components/Layout'
 import Trip from '../../ethereum/trip'
 import web3 from '../../ethereum/web3'
 import BookForm from '../../components/BookForm'
-import VoteForm from '../../components/VoteForm'
+import CaptainConfirmForm from '../../components/CaptainConfirmForm'
 import { Link } from '../../routes'
 import { type } from 'mocha/lib/utils'
 
@@ -23,6 +23,10 @@ class TripShow extends Component {
       cancelled: summary[4],
       readyToVote: summary[5],
       typeOfVote: summary[6],
+      reserved: summary[7],
+      refunded: summary[8],
+      clientConfirmed: summary[9],
+      captainConfirmed: summary[10],
     }
   }
 
@@ -35,55 +39,72 @@ class TripShow extends Component {
       cancelled,
       readyToVote,
       typeOfVote,
+      reserved,
+      refunded,
+      clientConfirmed,
+      captainConfirmed,
     } = this.props
 
     const items = [
       {
-        header: captain,
-        meta: 'Address of Captain',
-        description: 'The Captain created this trip',
-        style: { overflowWrap: 'break-word' },
-      },
-
-      {
-        // convert to ether using web3.utils.fromWei(, 'ether')
-        header: boatPrice,
-        meta: 'Trip price',
-        description: 'Price of the trip',
-        style: { overflowWrap: 'break-word' },
-      },
-
-      {
-        header: deposit,
-        meta: 'Deposit amount',
-        description: 'Deposit needed to book this trip',
-        style: { overflowWrap: 'break-word' },
-      },
-
-      {
-        header: totalBalance,
-        meta: 'Trip balance',
-        description: 'The amount deposited in this trip',
+        header: "Captain's Address",
+        meta: 'Ethereum',
+        description: captain,
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: cancelled,
-        meta: 'Cancelled or not?',
-        description: 'Cancelled trips are broken dreams',
-        style: { overflowWrap: 'break-word' },
-      },
-
-      {
-        header: readyToVote,
-        meta: 'Ready or not?',
-        description: 'This is the start of our adventure',
+        header: 'Price',
+        meta: 'The fare that the captain wishes to receive for this trip',
+        description: boatPrice,
         style: { overflowWrap: 'break-word' },
       },
       {
-        // convert to ether using web3.utils.fromWei(, 'ether')
-        header: typeOfVote,
-        meta: 'What type?',
-        description: 'Determines whether continue or refund',
+        header: 'Amount required to book',
+        meta: '(50/50) = price + deposit',
+        description: deposit,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Trip balance',
+        meta: 'The amount of value stored in this trip',
+        description: totalBalance,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Reserved?',
+        meta: '',
+        description: reserved.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Confirm or Refund?',
+        meta:
+          'Captain starts vote to continue(0), client starts vote for refund(1)',
+        description: typeOfVote,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Cancelled?',
+        meta: '-',
+        description: cancelled.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Refunded?',
+        meta: '-',
+        description: refunded.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Captain confirmed?',
+        meta: '-',
+        description: captainConfirmed.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Client confirmed?',
+        meta: '-',
+        description: clientConfirmed.toString(),
         style: { overflowWrap: 'break-word' },
       },
     ]
@@ -95,15 +116,14 @@ class TripShow extends Component {
     return (
       <Layout>
         <Grid>
-          <Grid.Column width={10}>
+          <Grid.Column width={11}>
             <h3>Trip Show</h3>
             {this.renderCards()}
           </Grid.Column>
-          <Grid.Column width={6}>
+          <Grid.Column width={9}>
             <BookForm address={this.props.address} />
-          </Grid.Column>
-          <Grid.Column width={6}>
-            <VoteForm address={this.props.address} />
+            <Divider></Divider>
+            <CaptainConfirmForm address={this.props.address} />
           </Grid.Column>
         </Grid>
       </Layout>
