@@ -65,46 +65,9 @@ class TripShow extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Trip balance',
-        meta: 'The amount of value stored in this trip',
-        description: totalBalance,
-        style: { overflowWrap: 'break-word' },
-      },
-      {
         header: 'Reserved?',
         meta: '',
         description: reserved.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Confirm or Refund?',
-        meta:
-          'Captain starts vote to continue(0), client starts vote for refund(1)',
-        description: typeOfVote,
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Cancelled?',
-        meta: '-',
-        description: cancelled.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Refunded?',
-        meta: '-',
-        description: refunded.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Captain confirmed?',
-        meta: '-',
-        description: captainConfirmed.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Client confirmed?',
-        meta: '-',
-        description: clientConfirmed.toString(),
         style: { overflowWrap: 'break-word' },
       },
     ]
@@ -117,14 +80,24 @@ class TripShow extends Component {
       <Layout>
         <Grid>
           <Grid.Column width={11}>
-            <h3>Trip Show</h3>
+            <h3>Trip details</h3>
             {this.renderCards()}
           </Grid.Column>
           <Grid.Column width={9}>
+            <h3>Trip booking</h3>
             <BookForm address={this.props.address} />
             <Divider></Divider>
             <CaptainConfirmForm address={this.props.address} />
           </Grid.Column>
+          <Grid.Row>
+            <Grid.Column>
+              <Link route={`/trips/${this.props.address}/votes`}>
+                <a>
+                  <Button color="yellow">Vote</Button>
+                </a>
+              </Link>
+            </Grid.Column>
+          </Grid.Row>
         </Grid>
       </Layout>
     )
