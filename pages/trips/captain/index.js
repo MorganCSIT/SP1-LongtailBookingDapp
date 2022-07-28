@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Card, Grid, Button } from 'semantic-ui-react'
+import { Card, Grid, Button, Divider, Container } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
+// import CaptainCornerForm from '../../../components/CaptainCornerForm'
 
 class CaptainCorner extends Component {
   static async getInitialProps(props) {
@@ -50,6 +51,12 @@ class CaptainCorner extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
+        header: 'Trip Info',
+        meta: '',
+        description: description,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
         header: 'Confirm or Refund?',
         meta:
           'Captain starts vote to continue(0), client starts vote for refund(1)',
@@ -90,8 +97,12 @@ class CaptainCorner extends Component {
       <Layout>
         <Grid>
           <Grid.Column>
-            <Button color="purple">Captains's Corner</Button>
+            <Button style={{ marginBottom: 10 }} color="purple" fluid>
+              Captains's Corner
+            </Button>
             {this.renderCards()}
+            <Divider></Divider>
+            <Grid.Row></Grid.Row>
           </Grid.Column>
         </Grid>
       </Layout>
