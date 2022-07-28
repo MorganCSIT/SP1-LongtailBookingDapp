@@ -90,7 +90,7 @@ class CaptainCorner extends Component {
       <Layout>
         <Grid>
           <Grid.Column>
-            <Button color="purple">Captain's Corner</Button>
+            <Button color="purple">Captains's Corner</Button>
             {this.renderCards()}
           </Grid.Column>
         </Grid>

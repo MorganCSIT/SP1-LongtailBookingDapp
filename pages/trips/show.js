@@ -91,7 +91,7 @@ class TripShow extends Component {
           </Grid.Column>
           <Grid.Row>
             <Grid.Column>
-              <Link route={`/trips/${this.props.address}/votes`}>
+              <Link route={`/trips/${this.props.address}/Adventurer`}>
                 <a>
                   <Button color="pink">Adventurer's corner</Button>
                 </a>

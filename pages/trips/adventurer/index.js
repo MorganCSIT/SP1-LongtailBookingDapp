@@ -3,7 +3,7 @@ import { Card, Grid, Button } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
 
-class TripVotes extends Component {
+class ClientCorner extends Component {
   static async getInitialProps(props) {
     const trip = Trip(props.query.address)
 
@@ -90,7 +90,7 @@ class TripVotes extends Component {
       <Layout>
         <Grid>
           <Grid.Column>
-            <Button color="pink">Adventurer's corner</Button>
+            <Button color="pink">Adventurer's Corner</Button>
             {this.renderCards()}
           </Grid.Column>
         </Grid>
@@ -99,4 +99,4 @@ class TripVotes extends Component {
   }
 }
 
-export default TripVotes
+export default ClientCorner
