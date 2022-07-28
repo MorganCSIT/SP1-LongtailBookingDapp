@@ -131,7 +131,7 @@ contract Trip {
         }
     }
 
-    function getSummary() public view returns (uint, uint, address, uint, bool, bool, uint8, bool, bool, bool, bool) {
+    function getSummary() public view returns (uint, uint, address, uint, bool, bool, uint8, bool, bool, bool, bool, string) {
         return (
           boatPrice,
           deposit,
@@ -143,7 +143,8 @@ contract Trip {
           reserved,
           refunded,
           clientConfirmed,
-          captainConfirmed
+          captainConfirmed,
+          description
         );
     }
 }

@@ -4,7 +4,6 @@ import Layout from '../../components/Layout'
 import Trip from '../../ethereum/trip'
 import web3 from '../../ethereum/web3'
 import BookForm from '../../components/BookForm'
-import CaptainConfirmForm from '../../components/CaptainConfirmForm'
 import { Link } from '../../routes'
 import { type } from 'mocha/lib/utils'
 
@@ -27,6 +26,7 @@ class TripShow extends Component {
       refunded: summary[8],
       clientConfirmed: summary[9],
       captainConfirmed: summary[10],
+      description: summary[11],
     }
   }
 
@@ -43,13 +43,14 @@ class TripShow extends Component {
       refunded,
       clientConfirmed,
       captainConfirmed,
+      description,
     } = this.props
 
     const items = [
       {
-        header: "Captain's Address",
-        meta: 'Ethereum',
-        description: captain,
+        header: 'Trip Info',
+        meta: 'Captains Trip details',
+        description: description,
         style: { overflowWrap: 'break-word' },
       },
       {
@@ -87,13 +88,17 @@ class TripShow extends Component {
             <h3>Trip booking</h3>
             <BookForm address={this.props.address} />
             <Divider></Divider>
-            <CaptainConfirmForm address={this.props.address} />
           </Grid.Column>
           <Grid.Row>
             <Grid.Column>
               <Link route={`/trips/${this.props.address}/votes`}>
                 <a>
-                  <Button color="yellow">Vote</Button>
+                  <Button color="pink">Adventurer's corner</Button>
+                </a>
+              </Link>
+              <Link route={`/trips/${this.props.address}/captain`}>
+                <a>
+                  <Button color="purple">Captain's Corner</Button>
                 </a>
               </Link>
             </Grid.Column>
