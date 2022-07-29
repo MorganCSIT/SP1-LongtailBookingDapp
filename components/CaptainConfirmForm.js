@@ -4,7 +4,7 @@ import Trip from '../ethereum/trip'
 import web3 from '../ethereum/web3'
 import { Router } from '../routes'
 import { link } from '../routes'
-class VoteForm extends Component {
+class CaptainConfirmForm extends Component {
   state = {
     value: '',
     errorMessage: '',
@@ -24,7 +24,7 @@ class VoteForm extends Component {
         value: this.state.value,
       })
 
-      Router.replaceRoute(`/trips/${this.props.address}`)
+      Router.replaceRoute(`/trips/${this.props.address}/captain`)
     } catch (err) {
       this.setState({ errorMessage: err.messaage })
     }
@@ -51,4 +51,4 @@ class VoteForm extends Component {
   }
 }
 
-export default VoteForm
+export default CaptainConfirmForm

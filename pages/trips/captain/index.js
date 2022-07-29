@@ -12,7 +12,7 @@ import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
 import web3 from '../../../ethereum/web3'
 import { Router } from '../../../routes'
-// import CaptainCornerForm from '../../../components/CaptainCornerForm'
+import CaptainConfirmForm from '../../../components/CaptainConfirmForm'
 
 class CaptainCorner extends Component {
   static async getInitialProps(props) {
@@ -97,6 +97,18 @@ class CaptainCorner extends Component {
         description: clientConfirmed.toString(),
         style: { overflowWrap: 'break-word' },
       },
+      {
+        header: 'Deposit',
+        meta: '-',
+        description: deposit,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Trip balance',
+        meta: '-',
+        description: totalBalance,
+        style: { overflowWrap: 'break-word' },
+      },
     ]
 
     return <Card.Group items={items} />
@@ -138,6 +150,10 @@ class CaptainCorner extends Component {
             {this.renderCards()}
             <Divider></Divider>
             <Grid.Row>
+              <CaptainConfirmForm address={this.props.address} />
+            </Grid.Row>
+            <Divider></Divider>
+            <Grid.Row>
               <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                 <Form.Field>
                   <label>Edit description</label>
@@ -156,7 +172,7 @@ class CaptainCorner extends Component {
                   content={this.state.errorMessage}
                 />
                 <Button loading={this.state.loading} color="green">
-                  Book!
+                  Edit!
                 </Button>
               </Form>
             </Grid.Row>
