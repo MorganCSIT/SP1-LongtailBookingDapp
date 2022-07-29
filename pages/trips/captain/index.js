@@ -26,14 +26,10 @@ class CaptainCorner extends Component {
       deposit: summary[1],
       captain: summary[2],
       totalBalance: summary[3],
-      cancelled: summary[4],
-      readyToVote: summary[5],
-      typeOfVote: summary[6],
-      reserved: summary[7],
-      refunded: summary[8],
-      clientConfirmed: summary[9],
-      captainConfirmed: summary[10],
-      description: summary[11],
+      reserved: summary[4],
+      refunded: summary[5],
+      confirmed: summary[6],
+      description: summary[7],
     }
   }
 
@@ -43,13 +39,9 @@ class CaptainCorner extends Component {
       deposit,
       captain,
       totalBalance,
-      cancelled,
-      readyToVote,
-      typeOfVote,
       reserved,
       refunded,
-      clientConfirmed,
-      captainConfirmed,
+      confirmed,
       description,
     } = this.props
 
@@ -67,40 +59,15 @@ class CaptainCorner extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Confirm or Refund?',
-        meta:
-          'Captain starts vote to continue(0), client starts vote for refund(1)',
-        description: typeOfVote,
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Cancelled?',
-        meta: '-',
-        description: cancelled.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
         header: 'Refunded?',
         meta: '-',
         description: refunded.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Captain confirmed?',
+        header: 'Confirmed?',
         meta: '-',
-        description: captainConfirmed.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Client confirmed?',
-        meta: '-',
-        description: clientConfirmed.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Deposit',
-        meta: '-',
-        description: deposit,
+        description: confirmed.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
@@ -144,9 +111,6 @@ class CaptainCorner extends Component {
       <Layout>
         <Grid>
           <Grid.Column>
-            <Button style={{ marginBottom: 10 }} color="purple" fluid>
-              Captains's Corner
-            </Button>
             {this.renderCards()}
             <Divider></Divider>
             <Grid.Row>
@@ -171,11 +135,15 @@ class CaptainCorner extends Component {
                   header="Oops!"
                   content={this.state.errorMessage}
                 />
-                <Button loading={this.state.loading} color="green">
+                <Button loading={this.state.loading} color="orange">
                   Edit!
                 </Button>
               </Form>
             </Grid.Row>
+            <Divider></Divider>
+            <Button style={{ marginBottom: 10 }} color="purple" fluid>
+              Captains's Corner
+            </Button>
           </Grid.Column>
         </Grid>
       </Layout>

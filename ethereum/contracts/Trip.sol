@@ -1,8 +1,5 @@
 pragma solidity ^0.4.17;
 
-// Factory in order to create mulitple instances of Trip contract without
-// manully constructing a template every time for the captain
-
 contract TripFactory {
     address[] public deployedTrips;
 
@@ -22,20 +19,13 @@ contract Trip {
     string public description;
     uint256 public boatPrice;
     uint256 public totalBalance;
-    bool public readyToVote;
-
-    bool public cancelled;
-    bool public reserved;
-    bool public refunded;
-    bool public clientConfirmed;
-    bool public captainConfirmed;
-
-    uint8 public typeOfVote;
     uint256 public deposit;
 
-    mapping(address => bool) addressStatus;
+// removed some variables as those were not used in the logic
 
-    
+    bool public reserved;
+    bool public refunded;
+    bool public confirmed; // replace readyToVote    
     
 
     modifier restricted() {
@@ -56,7 +46,7 @@ contract Trip {
 
     function reserve() public payable {
         require(msg.sender != captain);
-        require(msg.value >= boatPrice * 2);
+        require(msg.value >= deposit);
         require(reserved == false);
 
         reserved = true;
@@ -70,81 +60,64 @@ contract Trip {
     }
 
     function captainConfirmation() public restricted payable {
-        require(msg.value >= boatPrice * 2);
-        require(client != 0x0000000000000000000000000000000000000000);
-        captainConfirmed = true;
+        require(msg.value >= deposit);
+        require(reserved == true);
+        require(confirmed == false);
+        confirmed = true;
         totalBalance += msg.value;
 
     }
 
+// removed start vote and changed approve
+// added confirmation function to approve function
+//once captain has confirmed, either the client can confirm the trip or choose to refund which then the captain has to approve
 
-    function startVote() public {
-        require(captainConfirmed == true);
-        require(addressStatus[msg.sender] == false);
-        readyToVote = true;
-        if(msg.sender == captain){
-            typeOfVote = 0;
-        } else if(msg.sender == client){
-            typeOfVote = 1;
-        }
-    }
-
-    function approve() public {
-        require(readyToVote == true);
-        require(addressStatus[msg.sender] == false);
-
-        if (typeOfVote == 0) {
-            require(msg.sender == client);
-            confirmation();
-            addressStatus[client] = true;
-        } else if (typeOfVote == 1) {
-            require(msg.sender == captain);
-            refund();
-            addressStatus[captain] = true;
-            refunded = true;
-        }
-
-        readyToVote = false;
-    }
-
-    function confirmation() private {
+    function approveTrip() public onlyClient {
+        require(confirmed == true);
+        require(refunded == false);
         captain.transfer(boatPrice * 3);
         client.transfer(boatPrice);
-        clientConfirmed = true;
+        resetContract();
     }
 
-    function refund() private {
-        captain.transfer(deposit);
-        client.transfer(deposit);
+    function refund() public onlyClient {
+        require(confirmed == true);
         refunded = true;
     }
 
-    function cancellation() public {
-        require(cancelled == false);
-        if(msg.sender == captain){
-            require(client == 0x0000000000000000000000000000000000000000);
-            cancelled = true;  
-        } else if(msg.sender == client){
-            require(captainConfirmed == false);
-            client.transfer(deposit);
-            reserved = false;
-        }
+    function approveRefund() public restricted {
+        require(refunded == true);
+        captain.transfer(deposit);
+        client.transfer(deposit);
+        resetContract();
     }
 
-    function getSummary() public view returns (uint, uint, address, uint, bool, bool, uint8, bool, bool, bool, bool, string) {
+    function cancellation() public onlyClient{
+        require(confirmed == false);
+        client.transfer(deposit);
+        resetContract();
+        
+    }
+
+    function resetContract() private {
+        client = 0x0000000000000000000000000000000000000000;
+        totalBalance = 0;
+        reserved = false;
+        refunded = false;
+        confirmed = false;
+    }
+
+    function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string) {
         return (
           boatPrice,
           deposit,
           captain,
           totalBalance,
-          cancelled,
-          readyToVote,
-          typeOfVote,
-          reserved,
+          reserved, 
           refunded,
-          clientConfirmed,
-          captainConfirmed,
+          confirmed,
           description
         );
     }
+
 }

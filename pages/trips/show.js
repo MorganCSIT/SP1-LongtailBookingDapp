@@ -19,14 +19,10 @@ class TripShow extends Component {
       deposit: summary[1],
       captain: summary[2],
       totalBalance: summary[3],
-      cancelled: summary[4],
-      readyToVote: summary[5],
-      typeOfVote: summary[6],
-      reserved: summary[7],
-      refunded: summary[8],
-      clientConfirmed: summary[9],
-      captainConfirmed: summary[10],
-      description: summary[11],
+      reserved: summary[4],
+      refunded: summary[5],
+      confirmed: summary[6],
+      description: summary[7],
     }
   }
 
@@ -36,13 +32,9 @@ class TripShow extends Component {
       deposit,
       captain,
       totalBalance,
-      cancelled,
-      readyToVote,
-      typeOfVote,
       reserved,
       refunded,
-      clientConfirmed,
-      captainConfirmed,
+      confirmed,
       description,
     } = this.props
 
@@ -93,7 +85,7 @@ class TripShow extends Component {
             <Grid.Column>
               <Link route={`/trips/${this.props.address}/Adventurer`}>
                 <a>
-                  <Button color="pink">Adventurer's corner</Button>
+                  <Button color="pink">Adventurer's Corner</Button>
                 </a>
               </Link>
               <Link route={`/trips/${this.props.address}/captain`}>

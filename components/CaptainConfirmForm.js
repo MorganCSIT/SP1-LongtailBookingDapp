@@ -43,7 +43,7 @@ class CaptainConfirmForm extends Component {
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
-        <Button loading={this.state.loading} success>
+        <Button loading={this.state.loading} color="green">
           Confirm
         </Button>
       </Form>
