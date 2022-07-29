@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
-import { Card, Grid, Button, Divider, Container } from 'semantic-ui-react'
+import {
+  Card,
+  Grid,
+  Button,
+  Divider,
+  Form,
+  Message,
+  Input,
+} from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
+import web3 from '../../../ethereum/web3'
+import { Router } from '../../../routes'
 // import CaptainCornerForm from '../../../components/CaptainCornerForm'
 
 class CaptainCorner extends Component {
@@ -92,6 +102,31 @@ class CaptainCorner extends Component {
     return <Card.Group items={items} />
   }
 
+  state = {
+    description: '',
+    errorMessage: '',
+    loading: false,
+  }
+
+  onSubmit = async (event) => {
+    event.preventDefault()
+    const trip = Trip(this.props.address)
+
+    this.setState({ loading: true, errorMessage: '' })
+
+    const { description } = this.state
+
+    try {
+      const accounts = await web3.eth.getAccounts()
+      await trip.methods.setDescription(description).send({ from: accounts[0] })
+
+      Router.replaceRoute(`/trips/${this.props.address}/captain`)
+    } catch (err) {
+      this.setState({ errorMessage: err.message })
+    }
+    this.setState({ loading: false, message: '' })
+  }
+
   render() {
     return (
       <Layout>
@@ -102,7 +137,29 @@ class CaptainCorner extends Component {
             </Button>
             {this.renderCards()}
             <Divider></Divider>
-            <Grid.Row></Grid.Row>
+            <Grid.Row>
+              <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+                <Form.Field>
+                  <label>Edit description</label>
+                  <Input
+                    value={this.state.description}
+                    onChange={(event) =>
+                      this.setState({ description: event.target.value })
+                    }
+                    label="text"
+                    labelPosition="right"
+                  />
+                </Form.Field>
+                <Message
+                  error
+                  header="Oops!"
+                  content={this.state.errorMessage}
+                />
+                <Button loading={this.state.loading} color="green">
+                  Book!
+                </Button>
+              </Form>
+            </Grid.Row>
           </Grid.Column>
         </Grid>
       </Layout>
