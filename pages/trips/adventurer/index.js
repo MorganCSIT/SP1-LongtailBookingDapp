@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Card, Grid, Button, Divider } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
-
+import web3 from '../../../ethereum/web3'
 class ClientCorner extends Component {
   static async getInitialProps(props) {
     const trip = Trip(props.query.address)
@@ -64,12 +64,46 @@ class ClientCorner extends Component {
     return <Card.Group items={items} />
   }
 
+  onRefund = async () => {
+    const trip = Trip(this.props.address)
+
+    const accounts = await web3.eth.getAccounts()
+    await trip.methods.refund().send({
+      from: accounts[0],
+    })
+  }
+
+  onApproveTrip = async () => {
+    const trip = Trip(this.props.address)
+
+    const accounts = await web3.eth.getAccounts()
+    await trip.methods.approveTrip().send({
+      from: accounts[0],
+    })
+  }
+
   render() {
     return (
       <Layout>
         <Grid>
           <Grid.Column>
             {this.renderCards()}
+            <Grid.Row>
+              <Button
+                style={{ marginTop: 10 }}
+                color="red"
+                onClick={this.onRefund}
+              >
+                Refund
+              </Button>
+              <Button
+                style={{ marginTop: 10 }}
+                color="green"
+                onClick={this.onApproveTrip}
+              >
+                Approve Trip
+              </Button>
+            </Grid.Row>
             <Grid.Row>
               <Divider> </Divider>
               <Button style={{ marginBottom: 10 }} color="pink" fluid>

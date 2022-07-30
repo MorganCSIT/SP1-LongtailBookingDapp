@@ -121,3 +121,8 @@ contract Trip {
     }
 
 }
+
+// refund
+// approveRefund
+// approveTrip
+// cancellation
