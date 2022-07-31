@@ -8,7 +8,7 @@ class RefundButton extends Component {
     const trip = Trip(this.props.address)
 
     const accounts = await web3.eth.getAccounts()
-    await trip.methods.refund(this.address).send({
+    await trip.methods.refund().send({
       from: accounts[0],
     })
   }

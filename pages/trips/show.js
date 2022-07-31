@@ -53,7 +53,7 @@ class TripShow extends Component {
       },
       {
         header: 'Amount required to book',
-        meta: '(50/50) = price + deposit',
+        meta: 'Adventurers must provide a deposit matching the trips price',
         description: deposit,
         style: { overflowWrap: 'break-word' },
       },
