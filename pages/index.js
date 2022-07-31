@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card } from 'semantic-ui-react'
+import { Button, Card, Divider } from 'semantic-ui-react'
 import factory from '../ethereum/factory'
 import Layout from '../components/Layout'
 import { Link } from '../routes'
@@ -14,13 +14,14 @@ class TripIndex extends Component {
   renderTrips() {
     const items = this.props.trips.map((address) => {
       return {
-        header: address,
+        header: <p style={{ fontFamily: 'monospace' }}>{address}</p>,
         description: (
           <Link route={`/trips/${address}`}>
             <a>View Trip</a>
           </Link>
         ),
         fluid: true,
+        style: { overflowWrap: 'break-word' },
       }
     })
 
@@ -30,8 +31,13 @@ class TripIndex extends Component {
   render() {
     return (
       <Layout>
+        <div style={{ paddingTop: 8 }}>
+          <h3>Opened Trips</h3>
+
+          {this.renderTrips()}
+        </div>
+        <Divider></Divider>
         <div>
-          <h3>Open Trips</h3>
           <Link route="/trips/new">
             <a>
               <Button
@@ -42,7 +48,6 @@ class TripIndex extends Component {
               />
             </a>
           </Link>
-          {this.renderTrips()}
         </div>
       </Layout>
     )
