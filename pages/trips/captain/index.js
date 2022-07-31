@@ -106,11 +106,11 @@ class CaptainCorner extends Component {
     this.setState({ loading: false, message: '' })
   }
 
-  onConfirmRefund = async () => {
+  onApproveRefund = async () => {
     const trip = Trip(this.props.address)
 
     const accounts = await web3.eth.getAccounts()
-    await trip.methods.confirmRefund().send({
+    await trip.methods.approveRefund().send({
       from: accounts[0],
     })
   }
@@ -153,7 +153,7 @@ class CaptainCorner extends Component {
               <Button
                 style={{ marginTop: 10 }}
                 color="black"
-                onClick={this.onConfirmRefund}
+                onClick={this.onApproveRefund}
               >
                 Confirm Refund
               </Button>
