@@ -6,6 +6,7 @@ import web3 from '../../ethereum/web3'
 import BookForm from '../../components/BookForm'
 import { Link } from '../../routes'
 import { type } from 'mocha/lib/utils'
+// import { LinkPreview } from '@dhaiwat10/react-link-preview'
 
 class TripShow extends Component {
   static async getInitialProps(props) {
@@ -46,6 +47,12 @@ class TripShow extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
+        header: 'Reserved?',
+        meta: '',
+        description: reserved.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
         header: 'Price',
         meta: 'The fare that the captain wishes to receive for this trip',
         description: boatPrice,
@@ -55,12 +62,6 @@ class TripShow extends Component {
         header: 'Amount required to book',
         meta: 'Adventurers must provide a deposit matching the trips price',
         description: deposit,
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Reserved?',
-        meta: '',
-        description: reserved.toString(),
         style: { overflowWrap: 'break-word' },
       },
     ]

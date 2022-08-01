@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Grid, Button, Divider } from 'semantic-ui-react'
+import { Card, Grid, Button, Divider, Message } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
 import web3 from '../../../ethereum/web3'
@@ -64,13 +64,20 @@ class ClientCorner extends Component {
     return <Card.Group items={items} />
   }
 
-  onRefund = async () => {
-    const trip = Trip(this.props.address)
+  state = { loading: false }
 
-    const accounts = await web3.eth.getAccounts()
-    await trip.methods.refund().send({
-      from: accounts[0],
-    })
+  onRefund = async (event) => {
+    event.preventDefault()
+    const trip = Trip(this.props.address)
+    this.setState({ loading: true, errorMessage: '' })
+
+    try {
+      const accounts = await web3.eth.getAccounts()
+      await trip.methods.refund().send({
+        from: accounts[0],
+      })
+    } catch (err) {}
+    this.setState({ loading: false })
   }
 
   onApproveTrip = async () => {
@@ -93,6 +100,7 @@ class ClientCorner extends Component {
                 style={{ marginTop: 10 }}
                 color="red"
                 onClick={this.onRefund}
+                loading={this.state.loading}
               >
                 Refund
               </Button>
