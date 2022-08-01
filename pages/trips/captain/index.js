@@ -30,6 +30,7 @@ class CaptainCorner extends Component {
       refunded: summary[5],
       confirmed: summary[6],
       description: summary[7],
+      client: summary[8],
     }
   }
 
@@ -43,9 +44,16 @@ class CaptainCorner extends Component {
       refunded,
       confirmed,
       description,
+      client,
     } = this.props
 
     const items = [
+      {
+        header: 'Captain Address',
+        meta: '',
+        description: captain,
+        style: { overflowWrap: 'break-word' },
+      },
       {
         header: 'Reserved?',
         meta: '',

@@ -107,7 +107,7 @@ contract Trip {
         confirmed = false;
     }
 
-    function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string) {
+    function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string, address) {
         return (
           boatPrice,
           deposit,
@@ -117,12 +117,8 @@ contract Trip {
           refunded,
           confirmed,
           description
+          client,
         );
     }
 
 }
-
-// refund
-// approveRefund
-// approveTrip
-// cancellation

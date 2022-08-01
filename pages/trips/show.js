@@ -24,6 +24,7 @@ class TripShow extends Component {
       refunded: summary[5],
       confirmed: summary[6],
       description: summary[7],
+      client: summary[8],
     }
   }
 
@@ -37,6 +38,7 @@ class TripShow extends Component {
       refunded,
       confirmed,
       description,
+      client,
     } = this.props
 
     const items = [
@@ -45,6 +47,12 @@ class TripShow extends Component {
         meta: 'Captains Trip details',
         description: description,
         style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Captain Address',
+        meta: '',
+        description: captain,
+        style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
       },
       {
         header: 'Reserved?',

@@ -19,6 +19,7 @@ class ClientCorner extends Component {
       refunded: summary[5],
       confirmed: summary[6],
       description: summary[7],
+      client: summary[8],
     }
   }
 
@@ -32,9 +33,16 @@ class ClientCorner extends Component {
       refunded,
       confirmed,
       description,
+      client,
     } = this.props
 
     const items = [
+      {
+        header: 'Client Address',
+        meta: '-',
+        description: client,
+        style: { overflowWrap: 'break-word' },
+      },
       {
         header: 'Trip details',
         meta: '-',
