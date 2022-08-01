@@ -40,6 +40,7 @@ class CaptainConfirmForm extends Component {
             onChange={(event) => this.setState({ value: event.target.value })}
             label="wei"
             labelPosition="right"
+            placeholder="Price * 2"
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />

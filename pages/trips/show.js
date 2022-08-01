@@ -81,14 +81,13 @@ class TripShow extends Component {
     return (
       <Layout>
         <Grid>
-          <Grid.Column width={11}>
+          <Grid.Column width={16}>
             <h3>Trip details</h3>
             {this.renderCards()}
           </Grid.Column>
-          <Grid.Column width={9}>
+          <Grid.Column width={10}>
             <h3>Trip booking</h3>
             <BookForm address={this.props.address} />
-            <Divider></Divider>
           </Grid.Column>
           <Grid.Row>
             <Grid.Column>

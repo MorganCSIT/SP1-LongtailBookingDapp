@@ -114,13 +114,18 @@ class CaptainCorner extends Component {
     this.setState({ loading: false, message: '' })
   }
 
-  onApproveRefund = async () => {
+  onApproveRefund = async (event) => {
+    event.preventDefault()
     const trip = Trip(this.props.address)
+    this.setState({ loading2: true })
 
-    const accounts = await web3.eth.getAccounts()
-    await trip.methods.approveRefund().send({
-      from: accounts[0],
-    })
+    try {
+      const accounts = await web3.eth.getAccounts()
+      await trip.methods.approveRefund().send({
+        from: accounts[0],
+      })
+    } catch (err) {}
+    this.setState({ loading2: false })
   }
 
   render() {
@@ -130,14 +135,20 @@ class CaptainCorner extends Component {
           <Grid.Column>
             {this.renderCards()}
             <Divider></Divider>
+            <Button
+              style={{ marginBottom: 10, marginTop: 10 }}
+              color="purple"
+              fluid
+            >
+              Captains's Corner
+            </Button>
             <Grid.Row>
               <CaptainConfirmForm address={this.props.address} />
             </Grid.Row>
-            <Divider></Divider>
             <Grid.Row>
               <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                 <Form.Field>
-                  <label>Edit description</label>
+                  <label style={{ marginTop: '10px' }}>Edit description</label>
                   <Input
                     value={this.state.description}
                     onChange={(event) =>
@@ -159,17 +170,15 @@ class CaptainCorner extends Component {
             </Grid.Row>
             <Grid.Row>
               <Button
-                style={{ marginTop: 10 }}
+                style={{ marginTop: 10, marginBottom: 10 }}
                 color="black"
                 onClick={this.onApproveRefund}
+                loading={this.state.loading2}
               >
                 Confirm Refund
               </Button>
             </Grid.Row>
             <Divider></Divider>
-            <Button style={{ marginBottom: 10 }} color="purple" fluid>
-              Captains's Corner
-            </Button>
           </Grid.Column>
         </Grid>
       </Layout>

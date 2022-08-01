@@ -110,6 +110,10 @@ class ClientCorner extends Component {
         <Grid>
           <Grid.Column>
             {this.renderCards()}
+            <Divider></Divider>
+            <Button style={{ marginBottom: 10 }} color="pink" fluid>
+              Adventurer's Corner
+            </Button>
             <Grid.Row>
               <Button
                 style={{ marginTop: 10 }}
@@ -126,12 +130,6 @@ class ClientCorner extends Component {
                 loading={this.state.loading2}
               >
                 Approve Trip
-              </Button>
-            </Grid.Row>
-            <Grid.Row>
-              <Divider> </Divider>
-              <Button style={{ marginBottom: 10 }} color="pink" fluid>
-                Adventurer's Corner
               </Button>
             </Grid.Row>
           </Grid.Column>
