@@ -37,12 +37,12 @@ class ClientCorner extends Component {
     } = this.props
 
     const items = [
-      {
-        header: 'Client Address',
-        meta: '-',
-        description: client,
-        style: { overflowWrap: 'break-word' },
-      },
+      // {
+      //   header: 'Client Address',
+      //   meta: '-',
+      //   description: client,
+      //   style: { overflowWrap: 'break-word' },
+      // },
       {
         header: 'Trip details',
         meta: '-',
