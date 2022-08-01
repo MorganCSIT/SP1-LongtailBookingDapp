@@ -69,7 +69,7 @@ class ClientCorner extends Component {
   onRefund = async (event) => {
     event.preventDefault()
     const trip = Trip(this.props.address)
-    this.setState({ loading: true, errorMessage: '' })
+    this.setState({ loading: true })
 
     try {
       const accounts = await web3.eth.getAccounts()
@@ -80,13 +80,20 @@ class ClientCorner extends Component {
     this.setState({ loading: false })
   }
 
-  onApproveTrip = async () => {
-    const trip = Trip(this.props.address)
+  state = { loading2: false }
 
-    const accounts = await web3.eth.getAccounts()
-    await trip.methods.approveTrip().send({
-      from: accounts[0],
-    })
+  onApproveTrip = async (event) => {
+    event.preventDefault()
+    const trip = Trip(this.props.address)
+    this.setState({ loading2: true })
+
+    try {
+      const accounts = await web3.eth.getAccounts()
+      await trip.methods.approveTrip().send({
+        from: accounts[0],
+      })
+    } catch (err) {}
+    this.setState({ loading2: false })
   }
 
   render() {
@@ -108,6 +115,7 @@ class ClientCorner extends Component {
                 style={{ marginTop: 10 }}
                 color="green"
                 onClick={this.onApproveTrip}
+                loading={this.state.loading2}
               >
                 Approve Trip
               </Button>
