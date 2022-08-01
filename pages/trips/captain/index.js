@@ -178,7 +178,6 @@ class CaptainCorner extends Component {
                 Confirm Refund
               </Button>
             </Grid.Row>
-            <Divider></Divider>
           </Grid.Column>
         </Grid>
       </Layout>

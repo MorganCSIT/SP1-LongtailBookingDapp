@@ -111,7 +111,11 @@ class ClientCorner extends Component {
           <Grid.Column>
             {this.renderCards()}
             <Divider></Divider>
-            <Button style={{ marginBottom: 10 }} color="pink" fluid>
+            <Button
+              style={{ marginBottom: 10, marginTop: 10 }}
+              color="pink"
+              fluid
+            >
               Adventurer's Corner
             </Button>
             <Grid.Row>
