@@ -88,7 +88,7 @@ class TripShow extends Component {
                   <a>
                     <Button color="pink" size="tiny">
                       <Icon name="user circle" />
-                      Adventurer's Corner
+                      Adventurer
                     </Button>
                   </a>
                 </Link>
@@ -97,7 +97,7 @@ class TripShow extends Component {
                   <a>
                     <Button color="purple" size="tiny">
                       <Icon name="anchor" />
-                      Captain's Corner
+                      Captain
                     </Button>
                   </a>
                 </Link>
