@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Message, Button } from 'semantic-ui-react'
+import { Form, Input, Message, Button, Icon } from 'semantic-ui-react'
 import Trip from '../ethereum/trip'
 import web3 from '../ethereum/web3'
 import { Router } from '../routes'
@@ -40,11 +40,19 @@ class BookForm extends Component {
             onChange={(event) => this.setState({ value: event.target.value })}
             label="wei"
             labelPosition="right"
+            placeholder="Price * 2"
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
-        <Button loading={this.state.loading} color="green">
-          Book!
+        <Button
+          loading={this.state.loading}
+          circular
+          compact
+          fluid
+          color="green"
+        >
+          <Icon name="clipboard check" />
+          Reserve
         </Button>
       </Form>
     )

@@ -8,6 +8,7 @@ import {
   Message,
   Input,
   Icon,
+  Segment,
 } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
@@ -62,6 +63,12 @@ class CaptainCorner extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
+        header: 'Trip balance',
+        meta: '-',
+        description: totalBalance,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
         header: 'Trip Info',
         meta: '',
         description: description,
@@ -77,12 +84,6 @@ class CaptainCorner extends Component {
         header: 'Confirmed?',
         meta: '-',
         description: confirmed.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Trip balance',
-        meta: '-',
-        description: totalBalance,
         style: { overflowWrap: 'break-word' },
       },
     ]
@@ -132,59 +133,69 @@ class CaptainCorner extends Component {
   render() {
     return (
       <Layout>
-        <Grid>
-          <Grid.Column>
-            {this.renderCards()}
-            <Divider></Divider>
-            <Button
-              style={{ marginBottom: 10, marginTop: 10 }}
-              color="purple"
-              fluid
-            >
-              <Icon name="anchor" />
-              Captains's Corner
-            </Button>
-            <Grid.Row>
-              <CaptainConfirmForm address={this.props.address} />
-            </Grid.Row>
-            <Grid.Row>
-              <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
-                <Form.Field>
-                  <label style={{ marginTop: '10px' }}>Edit description</label>
-                  <Input
-                    value={this.state.description}
-                    onChange={(event) =>
-                      this.setState({ description: event.target.value })
-                    }
-                    label="text"
-                    labelPosition="right"
+        <Segment>
+          <Button style={{ marginBottom: 10 }} color="purple" fluid>
+            <Icon name="anchor" />
+            Captains's Corner
+          </Button>
+          <Grid>
+            <Grid.Column>
+              {this.renderCards()}
+              <Divider></Divider>
+              <Grid.Row>
+                <CaptainConfirmForm address={this.props.address} />
+              </Grid.Row>
+              <Grid.Row>
+                <Form
+                  onSubmit={this.onSubmit}
+                  error={!!this.state.errorMessage}
+                >
+                  <Form.Field>
+                    <label style={{ marginTop: '10px' }}>
+                      Edit description
+                    </label>
+                    <Input
+                      value={this.state.description}
+                      onChange={(event) =>
+                        this.setState({ description: event.target.value })
+                      }
+                      placeholder="Description"
+                    />
+                  </Form.Field>
+                  <Message
+                    error
+                    header="Oops!"
+                    content={this.state.errorMessage}
                   />
-                </Form.Field>
-                <Message
-                  error
-                  header="Oops!"
-                  content={this.state.errorMessage}
-                />
-                <Button loading={this.state.loading} color="orange" fluid>
-                  <Icon name="pencil" />
-                  Edit!
+                  <Button
+                    loading={this.state.loading}
+                    color="orange"
+                    circular
+                    compact
+                    fluid
+                  >
+                    <Icon name="pencil" />
+                    Edit Description
+                  </Button>
+                </Form>
+              </Grid.Row>
+              <Grid.Row>
+                <Button
+                  style={{ marginTop: 10, marginBottom: 10 }}
+                  color="black"
+                  onClick={this.onApproveRefund}
+                  loading={this.state.loading2}
+                  fluid
+                  circular
+                  compact
+                >
+                  <Icon name="exclamation" />
+                  Approve Refund
                 </Button>
-              </Form>
-            </Grid.Row>
-            <Grid.Row>
-              <Button
-                style={{ marginTop: 10, marginBottom: 10 }}
-                color="black"
-                onClick={this.onApproveRefund}
-                loading={this.state.loading2}
-                fluid
-              >
-                <Icon name="exclamation" />
-                Approve Refund
-              </Button>
-            </Grid.Row>
-          </Grid.Column>
-        </Grid>
+              </Grid.Row>
+            </Grid.Column>
+          </Grid>
+        </Segment>
       </Layout>
     )
   }

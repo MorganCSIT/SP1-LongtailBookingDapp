@@ -44,9 +44,15 @@ class CaptainConfirmForm extends Component {
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
-        <Button loading={this.state.loading} color="green" fluid>
+        <Button
+          loading={this.state.loading}
+          circular
+          compact
+          color="green"
+          fluid
+        >
           <Icon name="thumbs up" />
-          Confirm
+          Confirm Trip
         </Button>
       </Form>
     )

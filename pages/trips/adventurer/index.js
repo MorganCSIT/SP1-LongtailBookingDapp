@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Grid, Button, Divider, Icon } from 'semantic-ui-react'
+import { Card, Grid, Button, Divider, Icon, Segment } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
 import web3 from '../../../ethereum/web3'
@@ -37,17 +37,11 @@ class ClientCorner extends Component {
     } = this.props
 
     const items = [
-      // {
-      //   header: 'Client Address',
-      //   meta: '-',
-      //   description: client,
-      //   style: { overflowWrap: 'break-word' },
-      // },
       {
-        header: 'Trip details',
-        meta: '-',
-        description: description,
-        style: { overflowWrap: 'break-word' },
+        header: 'Adventurer Address',
+        meta: '',
+        description: client,
+        style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
       },
       {
         header: 'Reserved?',
@@ -59,6 +53,12 @@ class ClientCorner extends Component {
         header: 'Refunded?',
         meta: '-',
         description: refunded.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Trip details',
+        meta: '-',
+        description: description,
         style: { overflowWrap: 'break-word' },
       },
       {
@@ -104,43 +104,72 @@ class ClientCorner extends Component {
     this.setState({ loading2: false })
   }
 
+  state = { loading3: false }
+
+  onCancellation = async (event) => {
+    event.preventDefault()
+    const trip = Trip(this.props.address)
+    this.setState({ loading3: true })
+
+    try {
+      const accounts = await web3.eth.getAccounts()
+      await trip.methods.cancellation().send({
+        from: accounts[0],
+      })
+    } catch (err) {}
+    this.setState({ loading3: false })
+  }
+
   render() {
     return (
       <Layout>
-        <Grid>
-          <Grid.Column>
-            {this.renderCards()}
-            <Divider></Divider>
-            <Button
-              style={{ marginBottom: 10, marginTop: 10 }}
-              color="pink"
-              fluid
-            >
-              <Icon name="user circle" />
-              Adventurer's Corner
-            </Button>
-            <Grid.Row>
-              <Button
-                style={{ marginTop: 10 }}
-                color="red"
-                onClick={this.onRefund}
-                loading={this.state.loading}
-              >
-                <Icon name="exclamation" />
-                Refund
-              </Button>
-              <Button
-                style={{ marginTop: 10 }}
-                color="green"
-                onClick={this.onApproveTrip}
-                loading={this.state.loading2}
-              >
-                <Icon name="handshake outline" />
-                Approve Trip
-              </Button>
-            </Grid.Row>
-          </Grid.Column>
-        </Grid>
+        <Segment>
+          <Button style={{ marginBottom: 10 }} color="pink" fluid>
+            <Icon name="user circle" />
+            Adventurer's Corner
+          </Button>
+          <Grid>
+            <Grid.Column>
+              {this.renderCards()}
+              <Divider></Divider>
+              <Grid.Row>
+                <Button
+                  style={{ marginTop: 10 }}
+                  color="green"
+                  onClick={this.onApproveTrip}
+                  loading={this.state.loading2}
+                  circular
+                  compact
+                >
+                  <Icon name="thumbs up outline" />
+                  Approve Trip
+                </Button>
+                <Button
+                  style={{ marginTop: 10 }}
+                  color="brown"
+                  onClick={this.onCancellation}
+                  loading={this.state.loading3}
+                  circular
+                  compact
+                >
+                  <Icon name="trash" />
+                  Cancel Reservation
+                </Button>
+                <Button
+                  style={{ marginTop: 10 }}
+                  color="red"
+                  onClick={this.onRefund}
+                  loading={this.state.loading}
+                  circular
+                  compact
+                >
+                  <Icon name="exclamation triangle" />
+                  Refund
+                </Button>
+              </Grid.Row>
+            </Grid.Column>
+          </Grid>
+        </Segment>
       </Layout>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Grid, Button, Divider, Icon } from 'semantic-ui-react'
+import { Card, Grid, Button, Divider, Icon, Segment } from 'semantic-ui-react'
 import Layout from '../../components/Layout'
 import Trip from '../../ethereum/trip'
 import web3 from '../../ethereum/web3'
@@ -80,30 +80,36 @@ class TripShow extends Component {
   render() {
     return (
       <Layout>
-        <Grid>
-          <Grid.Column width={16}>
-            <h3>Trip details</h3>
-            {this.renderCards()}
-            <Divider></Divider>
-            <Grid.Row width={16}>
-              <BookForm address={this.props.address} />
-            </Grid.Row>
-          </Grid.Column>
-          <Grid.Row>
-            <Grid.Column>
-              <Link route={`/trips/${this.props.address}/Adventurer`}>
-                <a>
-                  <Button color="pink">Adventurer's Corner</Button>
-                </a>
-              </Link>
-              <Link route={`/trips/${this.props.address}/captain`}>
-                <a>
-                  <Button color="purple">Captain's Corner</Button>
-                </a>
-              </Link>
+        <Segment>
+          <Grid>
+            <Grid.Column width={16}>
+              <h3>
+                <Link route={`/trips/${this.props.address}/Adventurer`}>
+                  <a>
+                    <Button color="pink" size="tiny">
+                      <Icon name="user circle" />
+                      Adventurer's Corner
+                    </Button>
+                  </a>
+                </Link>
+                <Icon name="handshake outline" color="black" />
+                <Link route={`/trips/${this.props.address}/captain`}>
+                  <a>
+                    <Button color="purple" size="tiny">
+                      <Icon name="anchor" />
+                      Captain's Corner
+                    </Button>
+                  </a>
+                </Link>
+              </h3>
+              {this.renderCards()}
+              <Divider></Divider>
+              <Grid.Row width={16}>
+                <BookForm address={this.props.address} />
+              </Grid.Row>
             </Grid.Column>
-          </Grid.Row>
-        </Grid>
+          </Grid>
+        </Segment>
       </Layout>
     )
   }

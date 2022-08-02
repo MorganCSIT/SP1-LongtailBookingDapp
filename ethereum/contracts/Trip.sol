@@ -99,6 +99,8 @@ contract Trip {
         
     }
 
+    
+
     function resetContract() private {
         client = 0x0000000000000000000000000000000000000000;
         totalBalance = 0;
@@ -109,16 +111,15 @@ contract Trip {
 
     function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string, address) {
         return (
-          boatPrice,
-          deposit,
-          captain,
-          totalBalance,
-          reserved, 
-          refunded,
-          confirmed,
-          description
-          client,
+            boatPrice,
+            deposit,
+            captain,
+            totalBalance,
+            reserved, 
+            refunded,
+            confirmed,
+            description,
+            client
         );
     }
-
 }
