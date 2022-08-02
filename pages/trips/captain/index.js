@@ -7,6 +7,7 @@ import {
   Form,
   Message,
   Input,
+  Icon,
 } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
@@ -140,6 +141,7 @@ class CaptainCorner extends Component {
               color="purple"
               fluid
             >
+              <Icon name="anchor" />
               Captains's Corner
             </Button>
             <Grid.Row>
@@ -163,7 +165,8 @@ class CaptainCorner extends Component {
                   header="Oops!"
                   content={this.state.errorMessage}
                 />
-                <Button loading={this.state.loading} color="orange">
+                <Button loading={this.state.loading} color="orange" fluid>
+                  <Icon name="pencil" />
                   Edit!
                 </Button>
               </Form>
@@ -174,8 +177,10 @@ class CaptainCorner extends Component {
                 color="black"
                 onClick={this.onApproveRefund}
                 loading={this.state.loading2}
+                fluid
               >
-                Confirm Refund
+                <Icon name="exclamation" />
+                Approve Refund
               </Button>
             </Grid.Row>
           </Grid.Column>

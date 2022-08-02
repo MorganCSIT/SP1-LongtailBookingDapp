@@ -41,11 +41,11 @@ class BookForm extends Component {
             label="wei"
             labelPosition="right"
           />
-          <Button loading={this.state.loading} color="green">
-            Book!
-          </Button>
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
+        <Button loading={this.state.loading} color="green">
+          Book!
+        </Button>
       </Form>
     )
   }

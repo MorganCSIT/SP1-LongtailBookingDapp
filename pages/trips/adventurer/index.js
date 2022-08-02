@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Grid, Button, Divider, Message } from 'semantic-ui-react'
+import { Card, Grid, Button, Divider, Icon } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
 import web3 from '../../../ethereum/web3'
@@ -116,6 +116,7 @@ class ClientCorner extends Component {
               color="pink"
               fluid
             >
+              <Icon name="user circle" />
               Adventurer's Corner
             </Button>
             <Grid.Row>
@@ -125,6 +126,7 @@ class ClientCorner extends Component {
                 onClick={this.onRefund}
                 loading={this.state.loading}
               >
+                <Icon name="exclamation" />
                 Refund
               </Button>
               <Button
@@ -133,6 +135,7 @@ class ClientCorner extends Component {
                 onClick={this.onApproveTrip}
                 loading={this.state.loading2}
               >
+                <Icon name="handshake outline" />
                 Approve Trip
               </Button>
             </Grid.Row>

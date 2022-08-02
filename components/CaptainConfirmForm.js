@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Message, Button } from 'semantic-ui-react'
+import { Form, Input, Message, Button, Icon } from 'semantic-ui-react'
 import Trip from '../ethereum/trip'
 import web3 from '../ethereum/web3'
 import { Router } from '../routes'
@@ -44,7 +44,8 @@ class CaptainConfirmForm extends Component {
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
-        <Button loading={this.state.loading} color="green">
+        <Button loading={this.state.loading} color="green" fluid>
+          <Icon name="thumbs up" />
           Confirm
         </Button>
       </Form>

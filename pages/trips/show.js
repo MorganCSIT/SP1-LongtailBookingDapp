@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, Grid, Button, Divider } from 'semantic-ui-react'
+import { Card, Grid, Button, Divider, Icon } from 'semantic-ui-react'
 import Layout from '../../components/Layout'
 import Trip from '../../ethereum/trip'
 import web3 from '../../ethereum/web3'
@@ -86,7 +86,6 @@ class TripShow extends Component {
             {this.renderCards()}
             <Divider></Divider>
             <Grid.Row width={16}>
-              <h3>Trip booking</h3>
               <BookForm address={this.props.address} />
             </Grid.Row>
           </Grid.Column>
