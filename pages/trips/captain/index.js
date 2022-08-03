@@ -100,9 +100,7 @@ class CaptainCorner extends Component {
   onSubmit = async (event) => {
     event.preventDefault()
     const trip = Trip(this.props.address)
-
     this.setState({ loading: true, errorMessage: '' })
-
     const { description } = this.state
 
     try {
@@ -119,22 +117,24 @@ class CaptainCorner extends Component {
   onApproveRefund = async (event) => {
     event.preventDefault()
     const trip = Trip(this.props.address)
-    this.setState({ loading2: true })
+    this.setState({ loading2: true, errorMessage: '' })
 
     try {
       const accounts = await web3.eth.getAccounts()
       await trip.methods.approveRefund().send({
         from: accounts[0],
       })
-    } catch (err) {}
-    this.setState({ loading2: false })
+    } catch (err) {
+      this.setState({ errorMessage: err.message })
+    }
+    this.setState({ loading: false, message: ' ' })
   }
 
   render() {
     return (
       <Layout>
         <Segment>
-          <Button style={{ marginBottom: 10 }} color="purple" fluid>
+          <Button style={{ marginBottom: 10 }} color="purple">
             <Icon name="anchor" />
             Captains's Corner
           </Button>
@@ -172,7 +172,6 @@ class CaptainCorner extends Component {
                     color="orange"
                     circular
                     compact
-                    fluid
                   >
                     <Icon name="pencil" />
                     Edit Description
@@ -185,7 +184,6 @@ class CaptainCorner extends Component {
                   color="black"
                   onClick={this.onApproveRefund}
                   loading={this.state.loading2}
-                  fluid
                   circular
                   compact
                 >

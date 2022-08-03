@@ -1,5 +1,13 @@
 import React, { Component } from 'react'
-import { Card, Grid, Button, Divider, Icon, Segment } from 'semantic-ui-react'
+import {
+  Card,
+  Grid,
+  Button,
+  Divider,
+  Icon,
+  Segment,
+  Message,
+} from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
 import web3 from '../../../ethereum/web3'
@@ -72,59 +80,65 @@ class ClientCorner extends Component {
     return <Card.Group items={items} />
   }
 
-  state = { loading: false }
+  state = { loading: false, errorMessage: '' }
 
   onRefund = async (event) => {
     event.preventDefault()
     const trip = Trip(this.props.address)
-    this.setState({ loading: true })
+    this.setState({ loading: true, errorMessage: '' })
 
     try {
       const accounts = await web3.eth.getAccounts()
       await trip.methods.refund().send({
         from: accounts[0],
       })
-    } catch (err) {}
-    this.setState({ loading: false })
+    } catch (err) {
+      this.setState({ errorMessage: err.message })
+    }
+    this.setState({ loading: false, message: '' })
   }
 
-  state = { loading2: false }
+  state = { loading2: false, errorMessage: '' }
 
   onApproveTrip = async (event) => {
     event.preventDefault()
     const trip = Trip(this.props.address)
-    this.setState({ loading2: true })
+    this.setState({ loading2: true, errorMessage: '' })
 
     try {
       const accounts = await web3.eth.getAccounts()
       await trip.methods.approveTrip().send({
         from: accounts[0],
       })
-    } catch (err) {}
-    this.setState({ loading2: false })
+    } catch (err) {
+      this.setState({ errorMessage: err.message })
+    }
+    this.setState({ loading2: false, message: '' })
   }
 
-  state = { loading3: false }
+  state = { loading3: false, errorMessage: '' }
 
   onCancellation = async (event) => {
     event.preventDefault()
     const trip = Trip(this.props.address)
-    this.setState({ loading3: true })
+    this.setState({ loading3: true, errorMessage: '' })
 
     try {
       const accounts = await web3.eth.getAccounts()
       await trip.methods.cancellation().send({
         from: accounts[0],
       })
-    } catch (err) {}
-    this.setState({ loading3: false })
+    } catch (err) {
+      this.setState({ errorMessage: err.message })
+    }
+    this.setState({ loading3: false, message: '' })
   }
 
   render() {
     return (
       <Layout>
         <Segment>
-          <Button style={{ marginBottom: 10 }} color="pink" fluid>
+          <Button style={{ marginBottom: 10 }} color="pink">
             <Icon name="user circle" />
             Adventurer's Corner
           </Button>

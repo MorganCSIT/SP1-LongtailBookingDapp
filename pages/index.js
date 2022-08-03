@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, Divider } from 'semantic-ui-react'
+import { Button, Card, Divider, Segment } from 'semantic-ui-react'
 import factory from '../ethereum/factory'
 import Layout from '../components/Layout'
 import { Link } from '../routes'
@@ -31,24 +31,19 @@ class TripIndex extends Component {
   render() {
     return (
       <Layout>
-        <div style={{ paddingTop: 8 }}>
-          <h3>Opened Trips</h3>
+        <Segment>
+          <div style={{ paddingTop: 8 }}>
+            <h3>Opened Trips</h3>
 
-          {this.renderTrips()}
-        </div>
-        <Divider></Divider>
-        <div>
-          <Link route="/trips/new">
-            <a>
-              <Button
-                floated="right"
-                content="Create Trip"
-                icon="add"
-                primary
-              />
-            </a>
-          </Link>
-        </div>
+            {this.renderTrips()}
+          </div>
+          <Divider></Divider>
+        </Segment>
+        <Link route="/trips/new">
+          <a>
+            <Button floated="right" content="Create Trip" icon="add" primary />
+          </a>
+        </Link>
       </Layout>
     )
   }

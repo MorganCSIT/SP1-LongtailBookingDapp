@@ -82,27 +82,36 @@ class TripShow extends Component {
       <Layout>
         <Segment>
           <Grid>
-            <Grid.Column width={16}>
-              <h3>
-                <Link route={`/trips/${this.props.address}/Adventurer`}>
-                  <a>
-                    <Button color="pink" size="tiny">
-                      <Icon name="user circle" />
-                      Adventurer
-                    </Button>
-                  </a>
-                </Link>
-                <Icon name="handshake outline" color="black" />
-                <Link route={`/trips/${this.props.address}/captain`}>
-                  <a>
-                    <Button color="purple" size="tiny">
-                      <Icon name="anchor" />
-                      Captain
-                    </Button>
-                  </a>
-                </Link>
-              </h3>
-              {this.renderCards()}
+            <Grid.Column width={15}>
+              <Link route={`/trips/${this.props.address}/Adventurer`}>
+                <a>
+                  <Button color="pink">
+                    <Icon
+                      style={{ marginLeft: 8 }}
+                      size="large"
+                      name="user circle"
+                    />
+                  </Button>
+                </a>
+              </Link>
+              <Icon
+                name="handshake outline"
+                color="black"
+                size="large"
+                style={{ marginRight: 8, marginLeft: 6 }}
+              />
+              <Link route={`/trips/${this.props.address}/captain`}>
+                <a>
+                  <Button color="purple">
+                    <Icon
+                      name="anchor"
+                      size="large"
+                      style={{ marginLeft: 9 }}
+                    />
+                  </Button>
+                </a>
+              </Link>
+              <div style={{ marginTop: 14 }}>{this.renderCards()}</div>
               <Divider></Divider>
               <Grid.Row width={16}>
                 <BookForm address={this.props.address} />
