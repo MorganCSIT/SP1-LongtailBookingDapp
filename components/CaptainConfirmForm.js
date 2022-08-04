@@ -26,7 +26,7 @@ class CaptainConfirmForm extends Component {
 
       Router.replaceRoute(`/trips/${this.props.address}/captain`)
     } catch (err) {
-      this.setState({ errorMessage: err.messaage })
+      this.setState({ errorMessage: err.message })
     }
     this.setState({ loading: false, message: '' })
   }

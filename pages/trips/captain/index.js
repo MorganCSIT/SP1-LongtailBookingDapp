@@ -162,11 +162,6 @@ class CaptainCorner extends Component {
                       placeholder="Description"
                     />
                   </Form.Field>
-                  <Message
-                    error
-                    header="Oops!"
-                    content={this.state.errorMessage}
-                  />
                   <Button
                     loading={this.state.loading}
                     color="orange"
@@ -176,20 +171,23 @@ class CaptainCorner extends Component {
                     <Icon name="pencil" />
                     Edit Description
                   </Button>
+                  <Button
+                    style={{ marginTop: 10, marginBottom: 10 }}
+                    color="black"
+                    onClick={this.onApproveRefund}
+                    loading={this.state.loading2}
+                    circular
+                    compact
+                  >
+                    <Icon name="exclamation" />
+                    Approve Refund
+                  </Button>
+                  <Message
+                    error
+                    header="Oops!"
+                    content={this.state.errorMessage}
+                  />
                 </Form>
-              </Grid.Row>
-              <Grid.Row>
-                <Button
-                  style={{ marginTop: 10, marginBottom: 10 }}
-                  color="black"
-                  onClick={this.onApproveRefund}
-                  loading={this.state.loading2}
-                  circular
-                  compact
-                >
-                  <Icon name="exclamation" />
-                  Approve Refund
-                </Button>
               </Grid.Row>
             </Grid.Column>
           </Grid>

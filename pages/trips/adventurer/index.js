@@ -7,6 +7,7 @@ import {
   Icon,
   Segment,
   Message,
+  Form,
 } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
@@ -147,39 +148,46 @@ class ClientCorner extends Component {
               {this.renderCards()}
               <Divider></Divider>
               <Grid.Row>
-                <Button
-                  style={{ marginTop: 10 }}
-                  color="green"
-                  onClick={this.onApproveTrip}
-                  loading={this.state.loading2}
-                  circular
-                  compact
-                >
-                  <Icon name="thumbs up outline" />
-                  Approve Trip
-                </Button>
-                <Button
-                  style={{ marginTop: 10 }}
-                  color="brown"
-                  onClick={this.onCancellation}
-                  loading={this.state.loading3}
-                  circular
-                  compact
-                >
-                  <Icon name="trash" />
-                  Cancel Reservation
-                </Button>
-                <Button
-                  style={{ marginTop: 10 }}
-                  color="red"
-                  onClick={this.onRefund}
-                  loading={this.state.loading}
-                  circular
-                  compact
-                >
-                  <Icon name="exclamation triangle" />
-                  Refund
-                </Button>
+                <Form error={!!this.state.errorMessage}>
+                  <Button
+                    style={{ marginTop: 10 }}
+                    color="green"
+                    onClick={this.onApproveTrip}
+                    loading={this.state.loading2}
+                    circular
+                    compact
+                  >
+                    <Icon name="thumbs up outline" />
+                    Approve Trip
+                  </Button>
+                  <Button
+                    style={{ marginTop: 10 }}
+                    color="brown"
+                    onClick={this.onCancellation}
+                    loading={this.state.loading3}
+                    circular
+                    compact
+                  >
+                    <Icon name="trash" />
+                    Cancel Reservation
+                  </Button>
+                  <Button
+                    style={{ marginTop: 10 }}
+                    color="red"
+                    onClick={this.onRefund}
+                    loading={this.state.loading}
+                    circular
+                    compact
+                  >
+                    <Icon name="exclamation triangle" />
+                    Refund
+                  </Button>
+                  <Message
+                    error
+                    header="Oops!"
+                    content={this.state.errorMessage}
+                  />
+                </Form>
               </Grid.Row>
             </Grid.Column>
           </Grid>
