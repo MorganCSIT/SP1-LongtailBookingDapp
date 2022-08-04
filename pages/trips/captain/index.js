@@ -127,7 +127,7 @@ class CaptainCorner extends Component {
     } catch (err) {
       this.setState({ errorMessage: err.message })
     }
-    this.setState({ loading: false, message: ' ' })
+    this.setState({ loading2: false, message: ' ' })
   }
 
   render() {
