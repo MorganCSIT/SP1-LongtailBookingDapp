@@ -3,8 +3,8 @@ pragma solidity ^0.4.17;
 contract TripFactory {
     address[] public deployedTrips;
 
-    function createTrip(uint256 price) public {
-        address newTrip = new Trip(price, msg.sender);
+    function createTrip(address _captain) public { // change parameter from uint price to address _captain
+        address newTrip = new Trip(_captain); // price, msg.sender -> _captain
         deployedTrips.push(newTrip);
     }
 
@@ -20,12 +20,9 @@ contract Trip {
     uint256 public boatPrice;
     uint256 public totalBalance;
     uint256 public deposit;
-
-// removed some variables as those were not used in the logic
-
     bool public reserved;
     bool public refunded;
-    bool public confirmed; // replace readyToVote    
+    bool public confirmed;   
     
 
     modifier restricted() {
@@ -38,10 +35,8 @@ contract Trip {
         _;
     }
 
-    function Trip(uint256 _price, address _captain) public {
-        captain = _captain;
-        boatPrice = _price;
-        deposit = boatPrice * 2;
+    function Trip(address _captain) public { // removed price from parameter
+        captain = _captain; // removed boatPrice and deposit
     }
 
     function reserve() public payable {
