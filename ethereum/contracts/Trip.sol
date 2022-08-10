@@ -69,6 +69,12 @@ contract Trip {
         totalBalance += msg.value;
     }
 
+    function captainCancel() public restricted {
+        require(reserved == true);
+        require(confirmed == false);
+        resetContract();
+    }
+
 // removed start vote and changed approve
 // added confirmation function to approve function
 //once captain has confirmed, either the client can confirm the trip or choose to refund which then the captain has to approve
