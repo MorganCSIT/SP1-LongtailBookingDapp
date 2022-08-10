@@ -17,6 +17,7 @@ contract Trip {
     address public captain;
     address public client;
     string public description;
+    string public date;
     uint256 public boatPrice;
     uint256 public totalBalance;
     uint256 public deposit;
@@ -59,11 +60,12 @@ contract Trip {
         description = _description;
     }
 
-    function captainConfirmation() public restricted payable {
+    function captainConfirmation(string _date) public restricted payable {
         require(msg.value >= deposit);
         require(reserved == true);
         require(confirmed == false);
         confirmed = true;
+        date = _date;
         totalBalance += msg.value;
 
     }
@@ -107,9 +109,10 @@ contract Trip {
         reserved = false;
         refunded = false;
         confirmed = false;
+        date = ' ';
     }
 
-    function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string, address) {
+    function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string, address, string) {
         return (
             boatPrice,
             deposit,
@@ -119,7 +122,8 @@ contract Trip {
             refunded,
             confirmed,
             description,
-            client
+            client,
+            date
         );
     }
 }
