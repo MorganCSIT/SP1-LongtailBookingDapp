@@ -7,6 +7,7 @@ import { link } from '../routes'
 class CaptainConfirmForm extends Component {
   state = {
     value: '',
+    date: '',
     errorMessage: '',
     loading: false,
   }
@@ -14,12 +15,12 @@ class CaptainConfirmForm extends Component {
   onSubmit = async (event) => {
     event.preventDefault()
     const trip = Trip(this.props.address)
-
     this.setState({ loading: true, errorMessage: '' })
+    const { date } = this.state
 
     try {
       const accounts = await web3.eth.getAccounts()
-      await trip.methods.captainConfirmation().send({
+      await trip.methods.captainConfirmation(date).send({
         from: accounts[0],
         value: this.state.value,
       })
@@ -34,6 +35,14 @@ class CaptainConfirmForm extends Component {
     return (
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
         <Form.Field>
+          <label>Agreed date</label>
+          <Input
+            value={this.state.date}
+            onChange={(event) => this.setState({ date: event.target.value })}
+            label="text"
+            labelPosition="right"
+            placeholder="dd/mm/yyyy"
+          />
           <label>Amount to Confirm</label>
           <Input
             value={this.state.value}

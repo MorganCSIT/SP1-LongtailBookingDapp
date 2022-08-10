@@ -67,7 +67,6 @@ contract Trip {
         confirmed = true;
         date = _date;
         totalBalance += msg.value;
-
     }
 
 // removed start vote and changed approve

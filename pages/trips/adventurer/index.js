@@ -29,6 +29,7 @@ class ClientCorner extends Component {
       confirmed: summary[6],
       description: summary[7],
       client: summary[8],
+      date: summary[9],
     }
   }
 
@@ -43,6 +44,7 @@ class ClientCorner extends Component {
       confirmed,
       description,
       client,
+      date,
     } = this.props
 
     const items = [
@@ -56,6 +58,12 @@ class ClientCorner extends Component {
         header: 'Reserved?',
         meta: '',
         description: reserved.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Booked trip date',
+        meta: '',
+        description: date,
         style: { overflowWrap: 'break-word' },
       },
       {
