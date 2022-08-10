@@ -51,19 +51,19 @@ class TripShow extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Captain Address',
+        header: 'Current adventurer',
         meta: '',
-        description: captain,
+        description: client,
         style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
       },
       {
-        header: 'Reserved?',
+        header: 'Booked?',
         meta: '',
         description: reserved.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Reserved trip date',
+        header: 'Booked trip date',
         meta: '',
         description: date,
         style: { overflowWrap: 'break-word' },

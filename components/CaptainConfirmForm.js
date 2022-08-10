@@ -31,6 +31,23 @@ class CaptainConfirmForm extends Component {
     }
     this.setState({ loading: false, message: '' })
   }
+
+  onCaptainCancel = async (event) => {
+    event.preventDefault()
+    const trip = Trip(this.props.address)
+    this.setState({ loading3: true, errorMessage: '' })
+
+    try {
+      const accounts = await web3.eth.getAccounts()
+      await trip.methods.captainCancel().send({
+        from: accounts[0],
+      })
+    } catch (err) {
+      this.setState({ errorMessage: err.message })
+    }
+    this.setState({ loading3: false, message: ' ' })
+  }
+
   render() {
     return (
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
@@ -56,6 +73,17 @@ class CaptainConfirmForm extends Component {
         <Button loading={this.state.loading} circular compact color="green">
           <Icon name="thumbs up" />
           Confirm Trip
+        </Button>
+        <Button
+          style={{ marginTop: 10, marginBottom: 10 }}
+          color="brown"
+          onClick={this.onCaptainCancel}
+          loading={this.state.loading3}
+          circular
+          compact
+        >
+          <Icon name="trash" />
+          Cancel
         </Button>
       </Form>
     )

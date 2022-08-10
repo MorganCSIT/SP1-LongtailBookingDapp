@@ -30,6 +30,7 @@ class ClientCorner extends Component {
       description: summary[7],
       client: summary[8],
       date: summary[9],
+      refunding: summary[10],
     }
   }
 
@@ -49,10 +50,16 @@ class ClientCorner extends Component {
 
     const items = [
       {
-        header: 'Adventurer Address',
+        header: 'Adventurer address',
         meta: '',
         description: client,
         style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
+      },
+      {
+        header: 'Confirmed trip date',
+        meta: '',
+        description: date,
+        style: { overflowWrap: 'break-word' },
       },
       {
         header: 'Reserved?',
@@ -61,27 +68,27 @@ class ClientCorner extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Booked trip date',
-        meta: '',
-        description: date,
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Refunded?',
+        header: 'Refund requested?',
         meta: '-',
         description: refunded.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
         header: 'Trip details',
-        meta: '-',
+        meta: '',
         description: description,
         style: { overflowWrap: 'break-word' },
       },
       {
         header: 'confirmed',
-        meta: '-',
+        meta: '',
         description: confirmed.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Trip balance',
+        meta: '',
+        description: totalBalance,
         style: { overflowWrap: 'break-word' },
       },
     ]

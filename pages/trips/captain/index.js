@@ -33,6 +33,7 @@ class CaptainCorner extends Component {
       confirmed: summary[6],
       description: summary[7],
       client: summary[8],
+      date: summary[9],
     }
   }
 
@@ -47,6 +48,7 @@ class CaptainCorner extends Component {
       confirmed,
       description,
       client,
+      date,
     } = this.props
 
     const items = [
@@ -57,33 +59,39 @@ class CaptainCorner extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
+        header: 'Trip balance',
+        meta: '',
+        description: totalBalance,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
         header: 'Reserved?',
         meta: '',
         description: reserved.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Trip balance',
-        meta: '-',
-        description: totalBalance,
+        header: 'Refund requested?',
+        meta: '',
+        description: refunded.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Confirmed?',
+        meta: '',
+        description: confirmed.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'confirmed trip date',
+        meta: '',
+        description: date,
         style: { overflowWrap: 'break-word' },
       },
       {
         header: 'Trip Info',
         meta: '',
         description: description,
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Refunded?',
-        meta: '-',
-        description: refunded.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Confirmed?',
-        meta: '-',
-        description: confirmed.toString(),
         style: { overflowWrap: 'break-word' },
       },
     ]
