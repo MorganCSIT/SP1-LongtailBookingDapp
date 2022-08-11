@@ -2,9 +2,11 @@ pragma solidity ^0.4.17;
 
 contract TripFactory {
     address[] public deployedTrips;
+    address public contractOwner = 0x3D5485bCf2E656158043eB5f202524D553147A3e;
 
-    function createTrip(uint256 price) public {
-        address newTrip = new Trip(price, msg.sender);
+    function createTrip(uint256 price, address captain) public {
+        require(msg.sender == contractOwner);
+        address newTrip = new Trip(price, captain);
         deployedTrips.push(newTrip);
     }
 

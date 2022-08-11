@@ -57,13 +57,13 @@ class TripShow extends Component {
         style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
       },
       {
-        header: 'Booked?',
+        header: 'Reserved?',
         meta: '',
         description: reserved.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Booked trip date',
+        header: 'Confirmed trip date',
         meta: '',
         description: date,
         style: { overflowWrap: 'break-word' },
