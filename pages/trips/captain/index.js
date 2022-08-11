@@ -33,6 +33,7 @@ class CaptainCorner extends Component {
       confirmed: summary[6],
       description: summary[7],
       client: summary[8],
+      date: summary[9],
     }
   }
 
@@ -47,6 +48,7 @@ class CaptainCorner extends Component {
       confirmed,
       description,
       client,
+      date,
     } = this.props
 
     const items = [
@@ -57,33 +59,39 @@ class CaptainCorner extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
+        header: 'Trip balance',
+        meta: '',
+        description: totalBalance,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
         header: 'Reserved?',
         meta: '',
         description: reserved.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Trip balance',
-        meta: '-',
-        description: totalBalance,
+        header: 'Refund requested?',
+        meta: '',
+        description: refunded.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Confirmed?',
+        meta: '',
+        description: confirmed.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'confirmed trip date',
+        meta: '',
+        description: date,
         style: { overflowWrap: 'break-word' },
       },
       {
         header: 'Trip Info',
         meta: '',
         description: description,
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Refunded?',
-        meta: '-',
-        description: refunded.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Confirmed?',
-        meta: '-',
-        description: confirmed.toString(),
         style: { overflowWrap: 'break-word' },
       },
     ]
@@ -93,6 +101,7 @@ class CaptainCorner extends Component {
 
   state = {
     description: '',
+    price: '',
     errorMessage: '',
     loading: false,
   }
@@ -101,11 +110,13 @@ class CaptainCorner extends Component {
     event.preventDefault()
     const trip = Trip(this.props.address)
     this.setState({ loading: true, errorMessage: '' })
-    const { description } = this.state
+    const { description, price } = this.state
 
     try {
       const accounts = await web3.eth.getAccounts()
-      await trip.methods.setDescription(description).send({ from: accounts[0] })
+      await trip.methods
+        .setDescription(description, price)
+        .send({ from: accounts[0] })
 
       Router.replaceRoute(`/trips/${this.props.address}/captain`)
     } catch (err) {
@@ -152,8 +163,15 @@ class CaptainCorner extends Component {
                 >
                   <Form.Field>
                     <label style={{ marginTop: '10px' }}>
-                      Edit description
+                      Edit description and price
                     </label>
+                    <Input
+                      value={this.state.price}
+                      onChange={(event) =>
+                        this.setState({ price: event.target.value })
+                      }
+                      placeholder="Price"
+                    />
                     <Input
                       value={this.state.description}
                       onChange={(event) =>

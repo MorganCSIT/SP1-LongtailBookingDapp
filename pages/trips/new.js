@@ -7,7 +7,7 @@ import { Router } from '../../routes'
 
 class TripNew extends Component {
   state = {
-    boatPrice: '',
+    captainAddress: '',
     errorMessage: '',
     loading: false,
   }
@@ -19,7 +19,7 @@ class TripNew extends Component {
 
     try {
       const accounts = await web3.eth.getAccounts()
-      await factory.methods.createTrip(this.state.boatPrice).send({
+      await factory.methods.createTrip(this.state.captainAddress).send({
         from: accounts[0],
       })
 
@@ -37,13 +37,14 @@ class TripNew extends Component {
         <h3>Create a new trip</h3>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
-            <label>Price of the trip</label>
+            <label>Address of captain</label>
             <Input
-              label="wei"
+              label="ETH address"
               labelPosition="right"
-              value={this.state.boatPrice}
+              value={this.state.captainAddress}
+              placeholder="0x0000000000000000000000000000000000000000"
               onChange={(event) =>
-                this.setState({ boatPrice: event.target.value })
+                this.setState({ captainAddress: event.target.value })
               }
             />
           </Form.Field>

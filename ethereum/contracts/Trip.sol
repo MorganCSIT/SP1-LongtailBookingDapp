@@ -2,9 +2,16 @@ pragma solidity ^0.4.17;
 
 contract TripFactory {
     address[] public deployedTrips;
+    address public contractOwner = 0x3D5485bCf2E656158043eB5f202524D553147A3e;
 
+<<<<<<< HEAD
     function createTrip(address _captain) public { // change parameter from uint price to address _captain
         address newTrip = new Trip(_captain); // price, msg.sender -> _captain
+=======
+    function createTrip(address captain) public {
+        require(msg.sender == contractOwner);
+        address newTrip = new Trip(captain);
+>>>>>>> design-2
         deployedTrips.push(newTrip);
     }
 
@@ -17,6 +24,7 @@ contract Trip {
     address public captain;
     address public client;
     string public description;
+    string public date;
     uint256 public boatPrice;
     uint256 public totalBalance;
     uint256 public deposit;
@@ -35,8 +43,13 @@ contract Trip {
         _;
     }
 
+<<<<<<< HEAD
     function Trip(address _captain) public { // removed price from parameter
         captain = _captain; // removed boatPrice and deposit
+=======
+    function Trip(address _captain) public {
+        captain = _captain;
+>>>>>>> design-2
     }
 
     function reserve() public payable {
@@ -50,17 +63,25 @@ contract Trip {
 
     }
 
-    function setDescription(string _description) public restricted {
+    function setDescription(string _description, uint price) public restricted {
         description = _description;
+        boatPrice = price;
+        deposit = boatPrice * 2;
     }
 
-    function captainConfirmation() public restricted payable {
+    function captainConfirmation(string _date) public restricted payable {
         require(msg.value >= deposit);
         require(reserved == true);
         require(confirmed == false);
         confirmed = true;
+        date = _date;
         totalBalance += msg.value;
+    }
 
+    function captainCancel() public restricted {
+        require(reserved == true);
+        require(confirmed == false);
+        resetContract();
     }
 
 // removed start vote and changed approve
@@ -102,9 +123,10 @@ contract Trip {
         reserved = false;
         refunded = false;
         confirmed = false;
+        date = ' ';
     }
 
-    function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string, address) {
+    function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string, address, string) {
         return (
             boatPrice,
             deposit,
@@ -114,7 +136,8 @@ contract Trip {
             refunded,
             confirmed,
             description,
-            client
+            client,
+            date
         );
     }
 }
