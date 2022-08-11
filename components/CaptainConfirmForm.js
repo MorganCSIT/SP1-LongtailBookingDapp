@@ -52,7 +52,7 @@ class CaptainConfirmForm extends Component {
     return (
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
         <Form.Field>
-          <label>Agreed date</label>
+          <label>Confirm or Cancel trip</label>
           <Input
             value={this.state.date}
             onChange={(event) => this.setState({ date: event.target.value })}
@@ -60,13 +60,12 @@ class CaptainConfirmForm extends Component {
             labelPosition="right"
             placeholder="dd/mm/yyyy"
           />
-          <label>Amount to Confirm</label>
           <Input
             value={this.state.value}
             onChange={(event) => this.setState({ value: event.target.value })}
             label="wei"
             labelPosition="right"
-            placeholder="Price * 2"
+            placeholder="Deposit (price * 2)"
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />

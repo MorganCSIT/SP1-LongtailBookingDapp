@@ -4,9 +4,9 @@ contract TripFactory {
     address[] public deployedTrips;
     address public contractOwner = 0x3D5485bCf2E656158043eB5f202524D553147A3e;
 
-    function createTrip(uint256 price, address captain) public {
+    function createTrip(address captain) public {
         require(msg.sender == contractOwner);
-        address newTrip = new Trip(price, captain);
+        address newTrip = new Trip(captain);
         deployedTrips.push(newTrip);
     }
 
@@ -41,10 +41,8 @@ contract Trip {
         _;
     }
 
-    function Trip(uint256 _price, address _captain) public {
+    function Trip(address _captain) public {
         captain = _captain;
-        boatPrice = _price;
-        deposit = boatPrice * 2;
     }
 
     function reserve() public payable {
@@ -58,8 +56,10 @@ contract Trip {
 
     }
 
-    function setDescription(string _description) public restricted {
+    function setDescription(string _description, uint price) public restricted {
         description = _description;
+        boatPrice = price;
+        deposit = boatPrice * 2;
     }
 
     function captainConfirmation(string _date) public restricted payable {

@@ -101,6 +101,7 @@ class CaptainCorner extends Component {
 
   state = {
     description: '',
+    price: '',
     errorMessage: '',
     loading: false,
   }
@@ -109,11 +110,13 @@ class CaptainCorner extends Component {
     event.preventDefault()
     const trip = Trip(this.props.address)
     this.setState({ loading: true, errorMessage: '' })
-    const { description } = this.state
+    const { description, price } = this.state
 
     try {
       const accounts = await web3.eth.getAccounts()
-      await trip.methods.setDescription(description).send({ from: accounts[0] })
+      await trip.methods
+        .setDescription(description, price)
+        .send({ from: accounts[0] })
 
       Router.replaceRoute(`/trips/${this.props.address}/captain`)
     } catch (err) {
@@ -160,8 +163,15 @@ class CaptainCorner extends Component {
                 >
                   <Form.Field>
                     <label style={{ marginTop: '10px' }}>
-                      Edit description
+                      Edit description and price
                     </label>
+                    <Input
+                      value={this.state.price}
+                      onChange={(event) =>
+                        this.setState({ price: event.target.value })
+                      }
+                      placeholder="Price"
+                    />
                     <Input
                       value={this.state.description}
                       onChange={(event) =>
