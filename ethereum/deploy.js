@@ -3,9 +3,9 @@ const Web3 = require("web3");
 const compiledFactory = require("./build/TripFactory.json");
 
 const provider = new HDWalletProvider(
-  "pizza spike weather position vibrant select pottery inch blouse miss secret torch",
+  "sound priority friend hand memory scene orange heart mobile peanut track rude",
   // remember to change this to your own phrase!
-  "https://rinkeby.infura.io/v3/d44b50a1687c4a2f96cebed15d5f0183"
+  "https://rinkeby.infura.io/v3/4589b44432b844ba8566e9883f887b2d"
   // remember to change this to your own endpoint!
 );
 const web3 = new Web3(provider);

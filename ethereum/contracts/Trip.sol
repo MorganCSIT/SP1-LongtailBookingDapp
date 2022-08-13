@@ -4,14 +4,10 @@ contract TripFactory {
     address[] public deployedTrips;
     address public contractOwner = 0x3D5485bCf2E656158043eB5f202524D553147A3e;
 
-<<<<<<< HEAD
-    function createTrip(address _captain) public { // change parameter from uint price to address _captain
-        address newTrip = new Trip(_captain); // price, msg.sender -> _captain
-=======
+
     function createTrip(address captain) public {
         require(msg.sender == contractOwner);
         address newTrip = new Trip(captain);
->>>>>>> design-2
         deployedTrips.push(newTrip);
     }
 
@@ -43,13 +39,8 @@ contract Trip {
         _;
     }
 
-<<<<<<< HEAD
-    function Trip(address _captain) public { // removed price from parameter
-        captain = _captain; // removed boatPrice and deposit
-=======
     function Trip(address _captain) public {
         captain = _captain;
->>>>>>> design-2
     }
 
     function reserve() public payable {
@@ -84,7 +75,7 @@ contract Trip {
         resetContract();
     }
 
-// removed start vote and changed approve
+// removed start vote and change approve
 // added confirmation function to approve function
 //once captain has confirmed, either the client can confirm the trip or choose to refund which then the captain has to approve
 
