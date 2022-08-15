@@ -1,24 +1,25 @@
-pragma solidity ^0.4.17;
+//SPDX-License-Identifier: UNLINCENSED
+pragma solidity ^0.8.16;
 
 contract TripFactory {
-    address[] public deployedTrips;
-    address public contractOwner = 0x123D31F1Dd7d514Eed3e15E84C078DCEdab368cA;
+    Trip[] public deployedTrips;
+    address public contractOwner = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;
 
 
-    function createTrip(address captain) public {
-        require(msg.sender == contractOwner);
-        address newTrip = new Trip(captain);
+    function createTrip(address payable captain) public {
+        require(msg.sender == contractOwner, "You are not the contract owner");
+        Trip newTrip = new Trip(captain);
         deployedTrips.push(newTrip);
     }
 
-    function getDeployedTrips() public view returns (address[]) {
+    function getDeployedTrips() public view returns (Trip[] memory) {
         return deployedTrips;
     }
 }
 
 contract Trip {
-    address public captain;
-    address public client;
+    address payable public captain;
+    address payable public client;
     string public description;
     string public date;
     uint256 public boatPrice;
@@ -27,40 +28,39 @@ contract Trip {
     bool public reserved;
     bool public refunded;
     bool public confirmed;   
-    
 
     modifier restricted() {
-        require(msg.sender == captain);
+        require(msg.sender == captain, "You are not the Captain");
         _;
     }
 
     modifier onlyClient() {
-        require(msg.sender == client);
+        require(msg.sender == client, "You are not the Client");
         _;
     }
 
-    function Trip(address _captain) public {
+    constructor(address payable _captain) public {
         captain = _captain;
     }
 
     function reserve() public payable {
-        require(msg.sender != captain);
-        require(msg.value >= deposit);
-        require(reserved == false);
+        require(msg.sender != captain, "You cannot be the captain");
+        require(msg.value >= deposit, "Funds doesn't meet the requirements");
+        require(reserved == false, "Trip is already reserved");
 
         reserved = true;
         totalBalance += msg.value;
-        client = msg.sender;
+        client = payable(msg.sender);
 
     }
 
-    function setDescription(string _description, uint price) public restricted {
+    function setDescription(string memory _description, uint price) public restricted {
         description = _description;
         boatPrice = price;
         deposit = boatPrice * 2;
     }
 
-    function captainConfirmation(string _date) public restricted payable {
+    function captainConfirmation(string memory _date) public restricted payable {
         require(msg.value >= deposit);
         require(reserved == true);
         require(confirmed == false);
@@ -75,13 +75,10 @@ contract Trip {
         resetContract();
     }
 
-// removed start vote and change approve
-// added confirmation function to approve function
-//once captain has confirmed, either the client can confirm the trip or choose to refund which then the captain has to approve
-
     function approveTrip() public onlyClient {
         require(confirmed == true);
         require(refunded == false);
+        
         captain.transfer(boatPrice * 3);
         client.transfer(boatPrice);
         resetContract();
@@ -109,7 +106,7 @@ contract Trip {
     
 
     function resetContract() private {
-        client = 0x0000000000000000000000000000000000000000;
+        client = payable(0x0000000000000000000000000000000000000000);
         totalBalance = 0;
         reserved = false;
         refunded = false;
@@ -117,7 +114,7 @@ contract Trip {
         date = ' ';
     }
 
-    function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string, address, string) {
+    function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string memory, address, string memory) {
         return (
             boatPrice,
             deposit,
