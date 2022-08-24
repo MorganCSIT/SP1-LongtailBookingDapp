@@ -78,12 +78,11 @@ contract Trip {
 // removed start vote and change approve
 // added confirmation function to approve function
 //once captain has confirmed, either the client can confirm the trip or choose to refund which then the captain has to approve
-
     function approveTrip() public onlyClient {
         require(confirmed == true);
         require(refunded == false);
-        captain.transfer(boatPrice * 3);
-        client.transfer(boatPrice);
+        captain.transfer(deposit + boatPrice);
+        client.transfer(deposit - boatPrice);
         resetContract();
     }
 
