@@ -3,7 +3,7 @@ import { Form, Input, Message, Button, Icon } from 'semantic-ui-react'
 import Trip from '../ethereum/trip'
 import web3 from '../ethereum/web3'
 import { Router } from '../routes'
-import { link } from '../routes'
+import { Link } from '../routes'
 class BookForm extends Component {
   state = {
     value: '',
@@ -44,10 +44,14 @@ class BookForm extends Component {
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
-        <Button loading={this.state.loading} circular compact color="green">
-          <Icon name="clipboard check" />
-          Reserve
-        </Button>
+        <Link route={`/trips/${this.props.address}/adventurer`}>
+          <a>
+            <Button loading={this.state.loading} circular compact color="green">
+              <Icon name="clipboard check" />
+              Reserve
+            </Button>
+          </a>
+        </Link>
       </Form>
     )
   }

@@ -45,39 +45,28 @@ class TripShow extends Component {
 
     const items = [
       {
-        header: 'Trip Info',
-        meta: 'Captains Trip details',
-        description: description,
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Current adventurer',
-        meta: '',
-        description: client,
-        style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
-      },
-      {
         header: 'Reserved?',
         meta: '',
         description: reserved.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Confirmed trip date',
-        meta: '',
-        description: date,
+        header: 'Trip information',
+        meta: "Captain's contact and information",
+        description: description,
         style: { overflowWrap: 'break-word' },
       },
       {
         header: 'Price',
         meta: 'The fare that the captain wishes to receive for this trip',
-        description: boatPrice,
+        description: boatPrice + ' wei',
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Amount required to book',
-        meta: 'Adventurers must provide a deposit matching the trips price',
-        description: deposit,
+        header: 'Amount required to reserve',
+        meta:
+          'You must provide a deposit matching the price in order to reserve.',
+        description: deposit + ' wei',
         style: { overflowWrap: 'break-word' },
       },
     ]

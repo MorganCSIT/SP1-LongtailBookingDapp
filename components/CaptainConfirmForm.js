@@ -3,7 +3,7 @@ import { Form, Input, Message, Button, Icon } from 'semantic-ui-react'
 import Trip from '../ethereum/trip'
 import web3 from '../ethereum/web3'
 import { Router } from '../routes'
-import { link } from '../routes'
+import { Link } from '../routes'
 class CaptainConfirmForm extends Component {
   state = {
     value: '',
@@ -69,21 +69,25 @@ class CaptainConfirmForm extends Component {
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
-        <Button loading={this.state.loading} circular compact color="green">
-          <Icon name="thumbs up" />
-          Confirm Trip
-        </Button>
-        <Button
-          style={{ marginTop: 10, marginBottom: 10 }}
-          color="brown"
-          onClick={this.onCaptainCancel}
-          loading={this.state.loading3}
-          circular
-          compact
-        >
-          <Icon name="trash" />
-          Cancel
-        </Button>
+        <Link route={`/trips/${this.props.address}/captain`}>
+          <Button loading={this.state.loading} circular compact color="green">
+            <Icon name="thumbs up" />
+            Confirm Trip
+          </Button>
+        </Link>
+        <Link route={`/trips/${this.props.address}/captain`}>
+          <Button
+            style={{ marginTop: 10, marginBottom: 10 }}
+            color="brown"
+            onClick={this.onCaptainCancel}
+            loading={this.state.loading3}
+            circular
+            compact
+          >
+            <Icon name="trash" />
+            Cancel
+          </Button>
+        </Link>
       </Form>
     )
   }

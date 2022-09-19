@@ -53,7 +53,7 @@ class CaptainCorner extends Component {
 
     const items = [
       {
-        header: 'Captain Address',
+        header: "Captain's address",
         meta: '',
         description: captain,
         style: { overflowWrap: 'break-word' },
@@ -83,13 +83,13 @@ class CaptainCorner extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'confirmed trip date',
+        header: 'Confirmed trip date',
         meta: '',
         description: date,
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Trip Info',
+        header: 'Trip information',
         meta: '',
         description: description,
         style: { overflowWrap: 'break-word' },
