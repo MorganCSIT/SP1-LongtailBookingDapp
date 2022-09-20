@@ -125,22 +125,6 @@ class CaptainCorner extends Component {
     this.setState({ loading: false, message: '' })
   }
 
-  onApproveRefund = async (event) => {
-    event.preventDefault()
-    const trip = Trip(this.props.address)
-    this.setState({ loading2: true, errorMessage: '' })
-
-    try {
-      const accounts = await web3.eth.getAccounts()
-      await trip.methods.approveRefund().send({
-        from: accounts[0],
-      })
-    } catch (err) {
-      this.setState({ errorMessage: err.message })
-    }
-    this.setState({ loading2: false, message: ' ' })
-  }
-
   render() {
     return (
       <Layout>
@@ -187,18 +171,7 @@ class CaptainCorner extends Component {
                     compact
                   >
                     <Icon name="pencil" />
-                    Edit Description
-                  </Button>
-                  <Button
-                    style={{ marginTop: 10, marginBottom: 10 }}
-                    color="black"
-                    onClick={this.onApproveRefund}
-                    loading={this.state.loading2}
-                    circular
-                    compact
-                  >
-                    <Icon name="exclamation" />
-                    Approve Refund
+                    Set Description & Price
                   </Button>
                   <Message
                     error

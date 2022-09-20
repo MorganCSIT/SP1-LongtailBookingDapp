@@ -24,7 +24,7 @@ class BookForm extends Component {
         value: this.state.value,
       })
 
-      Router.replaceRoute(`/trips/${this.props.address}`)
+      Router.replaceRoute(`/trips/${this.props.address}/adventurer`)
     } catch (err) {
       this.setState({ errorMessage: err.message })
     }
@@ -44,14 +44,12 @@ class BookForm extends Component {
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
-        <Link route={`/trips/${this.props.address}/adventurer`}>
-          <a>
-            <Button loading={this.state.loading} circular compact color="green">
-              <Icon name="clipboard check" />
-              Reserve
-            </Button>
-          </a>
-        </Link>
+        <a>
+          <Button loading={this.state.loading} circular compact color="green">
+            <Icon name="clipboard check" />
+            Reserve
+          </Button>
+        </a>
       </Form>
     )
   }

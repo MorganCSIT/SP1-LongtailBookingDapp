@@ -45,15 +45,21 @@ class TripShow extends Component {
 
     const items = [
       {
+        header: 'Trip information',
+        meta: "Captain's contact and information",
+        description: description,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
         header: 'Reserved?',
         meta: '',
         description: reserved.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Trip information',
-        meta: "Captain's contact and information",
-        description: description,
+        header: 'Adventurer address',
+        meta: '',
+        description: client,
         style: { overflowWrap: 'break-word' },
       },
       {

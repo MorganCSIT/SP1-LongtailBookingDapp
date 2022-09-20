@@ -32,6 +32,23 @@ class CaptainConfirmForm extends Component {
     this.setState({ loading: false, message: '' })
   }
 
+  onApproveRefund = async (event) => {
+    event.preventDefault()
+    const trip = Trip(this.props.address)
+    this.setState({ loading2: true, errorMessage: '' })
+
+    try {
+      const accounts = await web3.eth.getAccounts()
+      await trip.methods.approveRefund().send({
+        from: accounts[0],
+      })
+      Router.replaceRoute(`/trips/${this.props.address}/captain`)
+    } catch (err) {
+      this.setState({ errorMessage: err.message })
+    }
+    this.setState({ loading2: false, message: ' ' })
+  }
+
   onCaptainCancel = async (event) => {
     event.preventDefault()
     const trip = Trip(this.props.address)
@@ -42,6 +59,7 @@ class CaptainConfirmForm extends Component {
       await trip.methods.captainCancel().send({
         from: accounts[0],
       })
+      Router.replaceRoute(`/trips/${this.props.address}/captain`)
     } catch (err) {
       this.setState({ errorMessage: err.message })
     }
@@ -69,25 +87,32 @@ class CaptainConfirmForm extends Component {
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
-        <Link route={`/trips/${this.props.address}/captain`}>
-          <Button loading={this.state.loading} circular compact color="green">
-            <Icon name="thumbs up" />
-            Confirm Trip
-          </Button>
-        </Link>
-        <Link route={`/trips/${this.props.address}/captain`}>
-          <Button
-            style={{ marginTop: 10, marginBottom: 10 }}
-            color="brown"
-            onClick={this.onCaptainCancel}
-            loading={this.state.loading3}
-            circular
-            compact
-          >
-            <Icon name="trash" />
-            Cancel
-          </Button>
-        </Link>
+        <Button loading={this.state.loading} circular compact color="green">
+          <Icon name="thumbs up" />
+          Confirm Trip
+        </Button>
+        <Button
+          style={{ marginTop: 10, marginBottom: 10 }}
+          color="brown"
+          onClick={this.onCaptainCancel}
+          loading={this.state.loading3}
+          circular
+          compact
+        >
+          <Icon name="trash" />
+          Cancel
+        </Button>
+        <Button
+          style={{ marginTop: 10, marginBottom: 10 }}
+          color="black"
+          onClick={this.onApproveRefund}
+          loading={this.state.loading2}
+          circular
+          compact
+        >
+          <Icon name="exclamation" />
+          Approve Refund
+        </Button>
       </Form>
     )
   }
