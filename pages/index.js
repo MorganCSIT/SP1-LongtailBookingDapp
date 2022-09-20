@@ -14,10 +14,12 @@ class TripIndex extends Component {
   renderTrips() {
     const items = this.props.trips.map((address) => {
       return {
-        header: <p style={{ fontFamily: 'monospace' }}>{address}</p>,
+        header: (
+          <p style={{ fontFamily: 'monospace' }}>{address.substring(1, 6)}</p>
+        ),
         description: (
           <Link route={`/trips/${address}`}>
-            <a>View Trip</a>
+            <a>View information</a>
           </Link>
         ),
         fluid: true,
