@@ -7,12 +7,11 @@ const Header = () => {
       <Link route="/">
         <a className="item">Tripify</a>
       </Link>
+      <Link route="/">
+        <a className="item">Trips</a>
+      </Link>
 
       <Menu.Menu position="right">
-        <Link route="/">
-          <a className="item">Trips</a>
-        </Link>
-
         <Link route="/trips/new">
           <a className="item">+</a>
         </Link>
