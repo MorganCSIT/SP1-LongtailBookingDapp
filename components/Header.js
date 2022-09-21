@@ -4,16 +4,20 @@ import { Link } from '../routes'
 const Header = () => {
   return (
     <Menu style={{ marginTop: '10px' }}>
+      <a
+        href={'https://morgancsit.github.io/lba-frontend/index.html'}
+        className="item"
+      >
+        Home
+      </a>
+
       <Link route="/">
-        <a className="item">Tripify</a>
-      </Link>
-      <Link route="/">
-        <a className="item">Trips</a>
+        <a className="item">Channels</a>
       </Link>
 
       <Menu.Menu position="right">
         <Link route="/trips/new">
-          <a className="item">+</a>
+          <a className="item">Admin</a>
         </Link>
       </Menu.Menu>
     </Menu>

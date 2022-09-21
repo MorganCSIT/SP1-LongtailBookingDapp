@@ -61,7 +61,7 @@ class CaptainCorner extends Component {
       {
         header: 'Trip balance',
         meta: '',
-        description: totalBalance,
+        description: totalBalance + ' wei',
         style: { overflowWrap: 'break-word' },
       },
       {
@@ -92,6 +92,18 @@ class CaptainCorner extends Component {
         header: 'Trip information',
         meta: '',
         description: description,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Price',
+        meta: '',
+        description: boatPrice + ' wei',
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Amount to deposit',
+        meta: '',
+        description: deposit + ' wei',
         style: { overflowWrap: 'break-word' },
       },
     ]
@@ -161,7 +173,7 @@ class CaptainCorner extends Component {
                       onChange={(event) =>
                         this.setState({ description: event.target.value })
                       }
-                      placeholder="Description"
+                      placeholder="Information"
                     />
                   </Form.Field>
                   <Button
@@ -171,7 +183,7 @@ class CaptainCorner extends Component {
                     compact
                   >
                     <Icon name="pencil" />
-                    Set Description & Price
+                    Set Price & Information
                   </Button>
                   <Message
                     error

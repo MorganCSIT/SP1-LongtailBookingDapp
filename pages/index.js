@@ -35,17 +35,12 @@ class TripIndex extends Component {
       <Layout>
         <Segment>
           <div style={{ paddingTop: 8 }}>
-            <h3>Opened Trips</h3>
+            <h3>Payment channels</h3>
 
             {this.renderTrips()}
           </div>
           <Divider></Divider>
         </Segment>
-        <Link route="/trips/new">
-          <a>
-            <Button floated="right" content="Create Trip" icon="add" primary />
-          </a>
-        </Link>
       </Layout>
     )
   }

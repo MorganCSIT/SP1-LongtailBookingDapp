@@ -51,13 +51,14 @@ contract Trip {
         reserved = true;
         totalBalance += msg.value;
         client = msg.sender;
-
     }
 
     function setDescription(string _description, uint price) public restricted {
+        require(reserved == false);
         description = _description;
         boatPrice = price;
         deposit = boatPrice * 2;
+        
     }
 
     function captainConfirmation(string _date) public restricted payable {

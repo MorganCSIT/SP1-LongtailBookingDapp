@@ -57,9 +57,9 @@ class ClientCorner extends Component {
         style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
       },
       {
-        header: 'Trip information',
-        meta: "Captain's contact and information",
-        description: description,
+        header: 'Confirmed?',
+        meta: 'Has the captain confirmed your reservation?',
+        description: confirmed.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
@@ -69,21 +69,15 @@ class ClientCorner extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Refund requested?',
-        meta: 'Adventurer initiated the refund process?',
-        description: refunded.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
-        header: 'Confirmed?',
-        meta: 'Has the captain confirmed your reservation?',
-        description: confirmed.toString(),
-        style: { overflowWrap: 'break-word' },
-      },
-      {
         header: 'Confirmed trip date',
         meta: 'Date for confirmed trip to take place.',
         description: date,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Refund requested?',
+        meta: 'Adventurer initiated the refund process?',
+        description: refunded.toString(),
         style: { overflowWrap: 'break-word' },
       },
     ]
