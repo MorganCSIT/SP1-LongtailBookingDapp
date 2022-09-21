@@ -34,7 +34,7 @@ class TripNew extends Component {
   render() {
     return (
       <Layout>
-        <h3>Create new payment channel</h3>
+        <h3>Create new reservation channel</h3>
         <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <Form.Field>
             <label>Address of captain</label>

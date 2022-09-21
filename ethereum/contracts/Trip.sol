@@ -58,7 +58,6 @@ contract Trip {
         description = _description;
         boatPrice = price;
         deposit = boatPrice * 2;
-        
     }
 
     function captainConfirmation(string _date) public restricted payable {
@@ -105,8 +104,6 @@ contract Trip {
         resetContract();
         
     }
-
-    
 
     function resetContract() private {
         client = 0x0000000000000000000000000000000000000000;
