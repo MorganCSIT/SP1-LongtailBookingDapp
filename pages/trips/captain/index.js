@@ -159,7 +159,7 @@ class CaptainCorner extends Component {
                 >
                   <Form.Field>
                     <label style={{ marginTop: '10px' }}>
-                      Edit description and price
+                      Edit information and price
                     </label>
                     <Input
                       value={this.state.price}

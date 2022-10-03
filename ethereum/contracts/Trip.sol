@@ -26,7 +26,8 @@ contract Trip {
     uint256 public deposit;
     bool public reserved;
     bool public refunded;
-    bool public confirmed;   
+    bool public confirmed;
+    address private owner = 0x123D31F1Dd7d514Eed3e15E84C078DCEdab368cA;   
     
 
     modifier restricted() {
@@ -81,10 +82,14 @@ contract Trip {
     function approveTrip() public onlyClient {
         require(confirmed == true);
         require(refunded == false);
-        captain.transfer(deposit + boatPrice);
+        uint fees = (boatPrice/10);
+        captain.transfer(deposit + boatPrice - fees);
         client.transfer(deposit - boatPrice);
+        owner.transfer(fees);
         resetContract();
     }
+
+
 
     function refund() public onlyClient {
         require(confirmed == true);

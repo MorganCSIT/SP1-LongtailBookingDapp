@@ -34,7 +34,7 @@ class BookForm extends Component {
     return (
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
         <Form.Field>
-          <label>Amount to Book</label>
+          <label>Amount to Reserve</label>
           <Input
             value={this.state.value}
             onChange={(event) => this.setState({ value: event.target.value })}
