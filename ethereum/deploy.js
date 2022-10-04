@@ -5,7 +5,7 @@ const compiledFactory = require('./build/TripFactory.json')
 const provider = new HDWalletProvider(
   'shoot roof remind child crucial camp old easy alpha music creek aware',
   // remember to change this to your own phrase!
-  'https://rinkeby.infura.io/v3/e5d343516d6342c8a6a3d553b8880fd7',
+  'https://goerli.infura.io/v3/504a1d12d31840c9ac149d436ee06b2c',
   // remember to change this to your own endpoint!
 )
 const web3 = new Web3(provider)
