@@ -63,9 +63,8 @@ class TripShow extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Amount required to reserve',
-        meta:
-          'You must provide a deposit matching the price in order to reserve.',
+        header: 'Price + Deposit',
+        meta: 'Deposit will be returned after your approval',
         description: deposit + ' wei',
         style: { overflowWrap: 'break-word' },
       },

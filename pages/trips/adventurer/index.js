@@ -57,6 +57,12 @@ class ClientCorner extends Component {
         style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
       },
       {
+        header: 'Trip information',
+        meta: '',
+        description: description,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
         header: 'Confirmed?',
         meta: 'Has the captain confirmed your reservation?',
         description: confirmed.toString(),
@@ -76,7 +82,7 @@ class ClientCorner extends Component {
       },
       {
         header: 'Refund requested?',
-        meta: 'Adventurer initiated the refund process?',
+        meta: 'Refund requires captains approval',
         description: refunded.toString(),
         style: { overflowWrap: 'break-word' },
       },

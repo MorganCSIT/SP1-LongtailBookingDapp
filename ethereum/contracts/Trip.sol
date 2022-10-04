@@ -116,7 +116,10 @@ contract Trip {
         reserved = false;
         refunded = false;
         confirmed = false;
-        date = ' ';
+        date = "";
+        description = "";
+        boatPrice = 0;
+        deposit = 0;
     }
 
     function getSummary() public view returns (uint256, uint256, address, uint256, bool, bool, bool, string, address, string) {
