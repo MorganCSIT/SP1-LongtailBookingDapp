@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, Divider, Segment } from 'semantic-ui-react'
+import { Button, Card, Divider, Segment, Icon } from 'semantic-ui-react'
 import factory from '../ethereum/factory'
 import Layout from '../components/Layout'
 import { Link } from '../routes'
@@ -15,11 +15,16 @@ class TripIndex extends Component {
     const items = this.props.trips.map((address) => {
       return {
         header: (
-          <p style={{ fontFamily: 'monospace' }}>{address.substring(1, 6)}</p>
+          <p style={{ fontFamily: 'monospace', fontWeight: 'bold' }}>
+            {address.substring(1, 6)}
+          </p>
         ),
         description: (
           <Link route={`/trips/${address}`}>
-            <a>View information</a>
+            <a>
+              <Icon name="info circle" />
+              Information
+            </a>
           </Link>
         ),
         fluid: true,
@@ -35,11 +40,44 @@ class TripIndex extends Component {
       <Layout>
         <Segment>
           <div style={{ paddingTop: 8 }}>
-            <h3>Reservation channels</h3>
-
+            <h2>Reservation channels</h2>
             {this.renderTrips()}
           </div>
           <Divider></Divider>
+        </Segment>
+        <Segment>
+          <div style={{ paddingTop: 8 }}>
+            <h3>
+              <Icon name="warning" color="" />
+              Metamask required
+            </h3>
+            <p>
+              To use the Crytolongtails reservation system, you will need to
+              either:
+            </p>
+            <p>1. Sign into the metamask web extension on your desktop or</p>
+            <p>
+              2. Use the mobile browser itergrated into the Metamask mobile
+              application.
+            </p>
+          </div>
+          <br></br>
+          <div style={{ paddingTop: 8 }}>
+            <h3>
+              <Icon name="question" color="" />
+              How to get started
+            </h3>
+            <p>
+              How to use -
+              <a href="https://morgancsit.github.io/lba-frontend/how-to-use.html">
+                https://morgancsit.github.io/lba-frontend/how-to-use.html
+              </a>
+            </p>
+            <p>
+              Download Metamask -
+              <a href="https://metamask.io/">https://metamask.io/</a>
+            </p>
+          </div>
         </Segment>
       </Layout>
     )

@@ -57,12 +57,6 @@ class ClientCorner extends Component {
         style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
       },
       {
-        header: 'Trip information',
-        meta: '',
-        description: description,
-        style: { overflowWrap: 'break-word' },
-      },
-      {
         header: 'Confirmed?',
         meta: 'Has the captain confirmed your reservation?',
         description: confirmed.toString(),
