@@ -64,7 +64,7 @@ class TripShow extends Component {
       },
       {
         header: 'Price + Deposit',
-        meta: 'Deposit will be returned after your approval',
+        meta: boatPrice + ' will be returned after your approval',
         description: deposit + ' wei',
         style: { overflowWrap: 'break-word' },
       },

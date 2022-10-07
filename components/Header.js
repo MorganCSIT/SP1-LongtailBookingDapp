@@ -17,17 +17,6 @@ const Header = () => {
           Channels
         </a>
       </Link>
-      <Menu.Menu>
-        <a href={'https://www.coinbase.com/converter/wei/thb'} className="item">
-          <Icon name="ethereum" color="" />
-          wei/Converter
-        </a>
-      </Menu.Menu>
-      <Menu.Menu position="right">
-        <Link route="/trips/new">
-          <a className="item"></a>
-        </Link>
-      </Menu.Menu>
     </Menu>
   )
 }

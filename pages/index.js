@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, Divider, Segment, Icon } from 'semantic-ui-react'
+import { Button, Card, Divider, Segment, Icon, Menu } from 'semantic-ui-react'
 import factory from '../ethereum/factory'
 import Layout from '../components/Layout'
 import { Link } from '../routes'
@@ -43,12 +43,28 @@ class TripIndex extends Component {
           </div>
           <Divider></Divider>
         </Segment>
+        <Menu>
+          <Menu.Menu>
+            <a
+              href={'https://www.coinbase.com/converter/wei/thb'}
+              className="item"
+            >
+              <Icon name="ethereum" color="" />
+              wei/Converter
+            </a>
+          </Menu.Menu>
+          <a href={'https://footpathapp.com/map'} className="item">
+            <Icon name="map marker alternate" color="" />
+            planner
+          </a>
+        </Menu>
         <Segment>
           <div style={{ paddingTop: 8 }}>
-            <h3>
-              <Icon name="warning" color="" />
-              Metamask required
-            </h3>
+            <h4>
+              Metamask wallet with
+              <Icon name="ethereum" color="" />
+              required
+            </h4>
             <p>
               To use the Crytolongtails reservation system, you will need to
               either:
@@ -63,11 +79,14 @@ class TripIndex extends Component {
           </div>
           <br></br>
           <div style={{ paddingTop: 8 }}>
-            <h3>
-              <Icon name="question" color="" />
+            <h5>
+              <Icon name="question circle" color="" />
               How to get started
-            </h3>
-            <p>Refer to the links below to get started</p>
+            </h5>
+            <p>
+              <Icon name="arrow right" color="" />
+              Refer to the links below to get started
+            </p>
             <ul>
               <li>
                 How to use -
