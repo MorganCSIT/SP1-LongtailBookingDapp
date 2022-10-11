@@ -9,6 +9,7 @@ import {
   Input,
   Icon,
   Segment,
+  Menu,
 } from 'semantic-ui-react'
 import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
@@ -194,6 +195,21 @@ class CaptainCorner extends Component {
               </Grid.Row>
             </Grid.Column>
           </Grid>
+          <Menu>
+            <Menu.Menu>
+              <a
+                href={'https://www.coinbase.com/converter/wei/thb'}
+                className="item"
+              >
+                <Icon name="ethereum" color="" />
+                wei/Converter
+              </a>
+            </Menu.Menu>
+            <a href={'https://footpathapp.com/map'} className="item">
+              <Icon name="map marker alternate" color="" />
+              planner
+            </a>
+          </Menu>
         </Segment>
       </Layout>
     )

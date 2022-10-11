@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Card, Divider, Segment, Icon, Menu } from 'semantic-ui-react'
+import { Button, Card, Divider, Segment, Icon } from 'semantic-ui-react'
 import factory from '../ethereum/factory'
 import Layout from '../components/Layout'
 import { Link } from '../routes'
@@ -14,16 +14,41 @@ class TripIndex extends Component {
   renderTrips() {
     const items = this.props.trips.map((address) => {
       return {
-        header: (
-          <p style={{ fontFamily: 'monospace' }}>{address.substring(1, 6)}</p>
-        ),
         description: (
-          <Link route={`/trips/${address}`}>
-            <a>
-              <Icon name="info circle" />
-              Information
-            </a>
-          </Link>
+          <div>
+            <Link route={`/trips/${address}`}>
+              <Button compact floated="left">
+                <a>
+                  <Icon name="sign-in" />
+                  <a style={{ fontFamily: 'monospace' }}>
+                    {address.substring(1, 6)}
+                  </a>
+                </a>
+              </Button>
+            </Link>
+            <Link route={`/trips/${address}/Adventurer`}>
+              <a>
+                <Button floated="left" compact color="pink">
+                  <Icon
+                    style={{ marginLeft: 3 }}
+                    size="standard"
+                    name="user circle"
+                  />
+                </Button>
+              </a>
+            </Link>
+            <Link route={`/trips/${address}/captain`}>
+              <a>
+                <Button floated="left" compact color="purple">
+                  <Icon
+                    name="anchor"
+                    size="standard"
+                    style={{ marginLeft: 3 }}
+                  />
+                </Button>
+              </a>
+            </Link>
+          </div>
         ),
         fluid: true,
         style: { overflowWrap: 'break-word' },
@@ -43,21 +68,6 @@ class TripIndex extends Component {
           </div>
           <Divider></Divider>
         </Segment>
-        <Menu>
-          <Menu.Menu>
-            <a
-              href={'https://www.coinbase.com/converter/wei/thb'}
-              className="item"
-            >
-              <Icon name="ethereum" color="" />
-              wei/Converter
-            </a>
-          </Menu.Menu>
-          <a href={'https://footpathapp.com/map'} className="item">
-            <Icon name="map marker alternate" color="" />
-            planner
-          </a>
-        </Menu>
         <Segment>
           <div style={{ paddingTop: 8 }}>
             <h4>
