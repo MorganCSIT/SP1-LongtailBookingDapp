@@ -63,7 +63,16 @@ class TripIndex extends Component {
       <Layout>
         <Segment>
           <div style={{ paddingTop: 8 }}>
-            <h2>Reservation channels</h2>
+            <h2>
+              <Icon
+                floated="right"
+                name="ship"
+                color="black"
+                size="large"
+                style={{}}
+              />
+              Reservation channels
+            </h2>
             {this.renderTrips()}
           </div>
           <Divider></Divider>
@@ -71,8 +80,8 @@ class TripIndex extends Component {
         <Segment>
           <div style={{ paddingTop: 8 }}>
             <h4>
-              Metamask wallet with
-              <Icon name="ethereum" color="" />
+              <Icon name="warning" color="" />
+              Metamask wallet containing <Icon name="ethereum" color="" />
               required
             </h4>
             <p>
