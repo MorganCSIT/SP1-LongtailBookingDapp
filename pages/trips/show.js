@@ -87,7 +87,7 @@ class TripShow extends Component {
         <Segment>
           <Grid>
             <Grid.Column width={15}>
-              {/* <Link route={`/trips/${this.props.address}/Adventurer`}>
+              <Link route={`/trips/${this.props.address}/Adventurer`}>
                 <a>
                   <Button color="pink">
                     <Icon
@@ -114,7 +114,7 @@ class TripShow extends Component {
                     />
                   </Button>
                 </a>
-              </Link> */}
+              </Link>
               <div style={{ marginTop: 14 }}>{this.renderCards()}</div>
               <Divider></Divider>
               <Grid.Row width={16}>
