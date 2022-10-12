@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Input, Message, Button, Icon } from 'semantic-ui-react'
+import { Form, Input, Message, Button, Icon, Divider } from 'semantic-ui-react'
 import Trip from '../ethereum/trip'
 import web3 from '../ethereum/web3'
 import { Router } from '../routes'
@@ -70,11 +70,10 @@ class CaptainConfirmForm extends Component {
     return (
       <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
         <Form.Field>
-          <label>Confirm or Cancel trip</label>
+          <label>Set confirmed date and deposit</label>
           <Input
             value={this.state.date}
             onChange={(event) => this.setState({ date: event.target.value })}
-            label="text"
             labelPosition="right"
             placeholder="dd/mm/yyyy"
           />
@@ -83,13 +82,13 @@ class CaptainConfirmForm extends Component {
             onChange={(event) => this.setState({ value: event.target.value })}
             label="wei"
             labelPosition="right"
-            placeholder="Deposit (price * 2)"
+            placeholder="Deposit = (Price * 2)"
           />
         </Form.Field>
         <Message error header="Oops!" content={this.state.errorMessage} />
         <Button loading={this.state.loading} circular compact color="green">
           <Icon name="thumbs up" />
-          Confirm Trip
+          Confirm
         </Button>
         <Button
           style={{ marginTop: 10, marginBottom: 10 }}
@@ -102,17 +101,23 @@ class CaptainConfirmForm extends Component {
           <Icon name="trash" />
           Cancel
         </Button>
-        <Button
-          style={{ marginTop: 10, marginBottom: 10 }}
-          color="black"
-          onClick={this.onApproveRefund}
-          loading={this.state.loading2}
-          circular
-          compact
-        >
-          <Icon name="exclamation" />
-          Approve Refund
-        </Button>
+        <Divider></Divider>
+        <Form>
+          <Form.Field>
+            <label>Approve trip refund</label>
+            <Button
+              style={{ marginTop: 10, marginBottom: 10 }}
+              color="black"
+              onClick={this.onApproveRefund}
+              loading={this.state.loading2}
+              circular
+              compact
+            >
+              <Icon name="exclamation" />
+              Approve Refund
+            </Button>
+          </Form.Field>
+        </Form>
       </Form>
     )
   }

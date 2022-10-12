@@ -151,9 +151,6 @@ class CaptainCorner extends Component {
               {this.renderCards()}
               <Divider></Divider>
               <Grid.Row>
-                <CaptainConfirmForm address={this.props.address} />
-              </Grid.Row>
-              <Grid.Row>
                 <Form
                   onSubmit={this.onSubmit}
                   error={!!this.state.errorMessage}
@@ -163,18 +160,20 @@ class CaptainCorner extends Component {
                       Edit information and price
                     </label>
                     <Input
-                      value={this.state.price}
-                      onChange={(event) =>
-                        this.setState({ price: event.target.value })
-                      }
-                      placeholder="Price"
-                    />
-                    <Input
                       value={this.state.description}
                       onChange={(event) =>
                         this.setState({ description: event.target.value })
                       }
                       placeholder="Information"
+                    />
+                    <Input
+                      value={this.state.price}
+                      onChange={(event) =>
+                        this.setState({ price: event.target.value })
+                      }
+                      placeholder="Price"
+                      label="wei"
+                      labelPosition="right"
                     />
                   </Form.Field>
                   <Button
@@ -192,6 +191,10 @@ class CaptainCorner extends Component {
                     content={this.state.errorMessage}
                   />
                 </Form>
+              </Grid.Row>
+              <Divider></Divider>
+              <Grid.Row>
+                <CaptainConfirmForm address={this.props.address} />
               </Grid.Row>
             </Grid.Column>
           </Grid>

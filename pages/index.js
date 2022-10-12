@@ -111,6 +111,9 @@ class TripIndex extends Component {
             </ul>
           </div>
         </Segment>
+        <Link route="/trips/new">
+          <Icon size="tiny" name="plus" color="" />
+        </Link>
       </Layout>
     )
   }

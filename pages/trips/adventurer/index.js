@@ -58,21 +58,33 @@ class ClientCorner extends Component {
         style: { overflowWrap: 'break-word', fontFamily: 'monospace' },
       },
       {
+        header: 'Trip info',
+        meta: '',
+        description: description,
+        style: { overflowWrap: 'break-word' },
+      },
+      {
+        header: 'Reserved?',
+        meta: '',
+        description: reserved.toString(),
+        style: { overflowWrap: 'break-word' },
+      },
+      {
         header: 'Confirmed?',
         meta: 'Has the captain confirmed your reservation?',
         description: confirmed.toString(),
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Trip balance',
-        meta: 'Current amount of value stored',
-        description: totalBalance + ' wei',
+        header: 'Confirmed date',
+        meta: 'Date for confirmed trip to take place.',
+        description: date,
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Confirmed trip date',
-        meta: 'Date for confirmed trip to take place.',
-        description: date,
+        header: 'Trip balance',
+        meta: 'Current amount of value stored in channel',
+        description: totalBalance + ' wei',
         style: { overflowWrap: 'break-word' },
       },
       {
@@ -154,45 +166,54 @@ class ClientCorner extends Component {
               <Divider></Divider>
               <Grid.Row>
                 <Form error={!!this.state.errorMessage}>
-                  <Link route={`/trips/${this.props.address}/adventurer`}>
-                    <Button
-                      style={{ marginTop: 10 }}
-                      color="green"
-                      onClick={this.onApproveTrip}
-                      loading={this.state.loading2}
-                      circular
-                      compact
-                    >
-                      <Icon name="thumbs up outline" />
-                      Approve Trip
-                    </Button>
-                  </Link>
-                  <Link route={`/trips/${this.props.address}/adventurer`}>
-                    <Button
-                      style={{ marginTop: 10 }}
-                      color="brown"
-                      onClick={this.onCancellation}
-                      loading={this.state.loading3}
-                      circular
-                      compact
-                    >
-                      <Icon name="trash" />
-                      Cancel Reservation
-                    </Button>
-                  </Link>
-                  <Link route={`/trips/${this.props.address}/adventurer`}>
-                    <Button
-                      style={{ marginTop: 10 }}
-                      color="red"
-                      onClick={this.onRefund}
-                      loading={this.state.loading}
-                      circular
-                      compact
-                    >
-                      <Icon name="exclamation triangle" />
-                      Refund
-                    </Button>
-                  </Link>
+                  <Form.Field>
+                    <label>Cancel when confirmed = false</label>
+                    <Link route={`/trips/${this.props.address}/adventurer`}>
+                      <Button
+                        style={{ marginTop: 10 }}
+                        color="brown"
+                        onClick={this.onCancellation}
+                        loading={this.state.loading3}
+                        circular
+                        compact
+                      >
+                        <Icon name="trash" />
+                        Cancel Reservation
+                      </Button>
+                    </Link>
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Request refund when confirmed = true</label>
+                    <Link route={`/trips/${this.props.address}/adventurer`}>
+                      <Button
+                        style={{ marginTop: 10 }}
+                        color="black"
+                        onClick={this.onRefund}
+                        loading={this.state.loading}
+                        circular
+                        compact
+                      >
+                        <Icon name="exclamation triangle" />
+                        Request Refund
+                      </Button>
+                    </Link>
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Approve trip after meeting captain</label>
+                    <Link route={`/trips/${this.props.address}/adventurer`}>
+                      <Button
+                        style={{ marginTop: 10 }}
+                        color="green"
+                        onClick={this.onApproveTrip}
+                        loading={this.state.loading2}
+                        circular
+                        compact
+                      >
+                        <Icon name="thumbs up outline" />
+                        Approve Trip
+                      </Button>
+                    </Link>
+                  </Form.Field>
                   <Message
                     error
                     header="Oops!"

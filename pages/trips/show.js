@@ -53,7 +53,7 @@ class TripShow extends Component {
 
     const items = [
       {
-        header: 'Trip information',
+        header: 'Trip info',
         meta: '',
         description: description,
         style: { overflowWrap: 'break-word' },
@@ -71,9 +71,9 @@ class TripShow extends Component {
         style: { overflowWrap: 'break-word' },
       },
       {
-        header: 'Price + Deposit',
+        header: 'Amount needed to reserve',
         meta: boatPrice + ' will be returned after your approval',
-        description: deposit + ' wei',
+        description: deposit + ' wei ',
         style: { overflowWrap: 'break-word' },
       },
     ]
@@ -87,7 +87,7 @@ class TripShow extends Component {
         <Segment>
           <Grid>
             <Grid.Column width={15}>
-              <Link route={`/trips/${this.props.address}/Adventurer`}>
+              {/* <Link route={`/trips/${this.props.address}/Adventurer`}>
                 <a>
                   <Button color="pink">
                     <Icon
@@ -114,7 +114,7 @@ class TripShow extends Component {
                     />
                   </Button>
                 </a>
-              </Link>
+              </Link> */}
               <div style={{ marginTop: 14 }}>{this.renderCards()}</div>
               <Divider></Divider>
               <Grid.Row width={16}>
