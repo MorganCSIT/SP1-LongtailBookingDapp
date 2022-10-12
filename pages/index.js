@@ -17,13 +17,15 @@ class TripIndex extends Component {
         description: (
           <div>
             <Link route={`/trips/${address}`}>
-              <Button compact floated="left">
-                <a>
-                  <Icon name="sign-in" />
-                  <a style={{ fontFamily: 'monospace' }}>
-                    {address.substring(1, 6)}
-                  </a>
-                </a>
+              <Button
+                style={{ fontFamily: 'monospace' }}
+                color="blue"
+                compact
+                floated="left"
+              >
+                <Icon name="ethereum" />
+
+                {address.substring(1, 6)}
               </Button>
             </Link>
             <Link route={`/trips/${address}/Adventurer`}>
@@ -68,19 +70,17 @@ class TripIndex extends Component {
                 floated="right"
                 name="ship"
                 color="black"
-                size="large"
+                size="normal"
                 style={{}}
               />
               Reservation channels
             </h2>
             {this.renderTrips()}
           </div>
-          <Divider></Divider>
         </Segment>
         <Segment>
           <div style={{ paddingTop: 8 }}>
             <h4>
-              <Icon name="warning" color="" />
               Metamask wallet containing <Icon name="ethereum" color="" />
               required
             </h4>
@@ -98,14 +98,8 @@ class TripIndex extends Component {
           </div>
           <br></br>
           <div style={{ paddingTop: 8 }}>
-            <h5>
-              <Icon name="question circle" color="" />
-              How to get started
-            </h5>
-            <p>
-              <Icon name="arrow right" color="" />
-              Refer to the links below to get started
-            </p>
+            <h5>How to get started</h5>
+            <p>Refer to the links below to get started</p>
             <ul>
               <li>
                 How to use -
