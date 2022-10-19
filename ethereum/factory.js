@@ -3,7 +3,7 @@ import TripFactory from './build/TripFactory.json'
 
 const instance = new web3.eth.Contract(
   JSON.parse(TripFactory.interface),
-  '0x5F16F3806a31F2f813048a77B45AB667d0d58575',
+  '0xa94eFA25d2202b9A3A6f3c608b69377d20fE939C',
 )
 
 export default instance
