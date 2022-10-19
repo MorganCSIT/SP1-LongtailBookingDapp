@@ -73,6 +73,7 @@ contract Trip {
     function captainCancel() public restricted {
         require(reserved == true);
         require(confirmed == false);
+        client.transfer(totalBalance);
         resetContract();
     }
 

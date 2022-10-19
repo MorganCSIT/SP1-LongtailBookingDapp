@@ -87,10 +87,13 @@ class TripShow extends Component {
         <Segment>
           <Grid>
             <Grid.Column width={15}>
-              <Button color="blue">
-                <Icon name="ethereum" />
-                {this.props.address.substring(1, 6)}
-              </Button>
+              <Link route="/">
+                <Button color="blue">
+                  <Icon name="ethereum" />
+                  {this.props.address.substring(1, 6)}
+                </Button>
+              </Link>
+
               {/* <Link route={`/trips/${this.props.address}/Adventurer`}>
                 <a>
                   <Button color="pink">
