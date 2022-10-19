@@ -46,7 +46,7 @@ contract Trip {
 
     function reserve() public payable {
         require(msg.sender != captain);
-        require(msg.value >= deposit);
+        require(msg.value == deposit);
         require(reserved == false);
 
         reserved = true;
@@ -62,7 +62,7 @@ contract Trip {
     }
 
     function captainConfirmation(string _date) public restricted payable {
-        require(msg.value >= deposit);
+        require(msg.value == deposit);
         require(reserved == true);
         require(confirmed == false);
         confirmed = true;
