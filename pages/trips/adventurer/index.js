@@ -156,10 +156,12 @@ class ClientCorner extends Component {
     return (
       <Layout>
         <Segment>
-          <Button style={{ marginBottom: 10 }} color="pink">
-            <Icon name="user circle" />
-            Adventurer's Corner
-          </Button>
+          <Link route="/">
+            <Button style={{ marginBottom: 10 }} color="pink">
+              <Icon name="user circle" />
+              Adventurer's Corner
+            </Button>
+          </Link>
           <Grid>
             <Grid.Column>
               {this.renderCards()}

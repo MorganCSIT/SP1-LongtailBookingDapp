@@ -15,6 +15,7 @@ import Layout from '../../../components/Layout'
 import Trip from '../../../ethereum/trip'
 import web3 from '../../../ethereum/web3'
 import { Router } from '../../../routes'
+import { Link } from '../../../routes'
 import CaptainConfirmForm from '../../../components/CaptainConfirmForm'
 
 class CaptainCorner extends Component {
@@ -142,10 +143,12 @@ class CaptainCorner extends Component {
     return (
       <Layout>
         <Segment>
-          <Button style={{ marginBottom: 10 }} color="purple">
-            <Icon name="anchor" />
-            Captains's Corner
-          </Button>
+          <Link route="/">
+            <Button style={{ marginBottom: 10 }} color="purple">
+              <Icon name="anchor" />
+              Captains's Corner
+            </Button>
+          </Link>
           <Grid>
             <Grid.Column>
               {this.renderCards()}
